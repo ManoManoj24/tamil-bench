@@ -133,10 +133,13 @@ body {
 .task-note { font-size: 13.5px; color: var(--muted); margin: 10px 0 12px; min-height: 20px; }
 
 /* table */
-.table-scroll { overflow-x: auto; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); box-shadow: var(--shadow); }
-table.board { width: 100%; border-collapse: collapse; font-size: 14.5px; min-width: 760px; }
+.table-scroll { overflow-x: clip; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); box-shadow: var(--shadow); }
+table.board { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 14.5px; min-width: 760px; }
+/* Sticky header: applied to thead (not th) with separated borders — the
+   th-level sticky + border-collapse pattern overlaps the first body row. */
+.board thead { position: sticky; top: 60px; z-index: 5; }
 .board thead th {
-  position: sticky; top: 60px; background: var(--surface-2); z-index: 5;
+  background: var(--surface-2);
   text-align: left; font-size: 12px; text-transform: uppercase; letter-spacing: .06em;
   color: var(--muted); padding: 12px 14px; border-bottom: 1px solid var(--line);
   white-space: nowrap; user-select: none;
@@ -242,5 +245,8 @@ footer a { color: var(--accent-ink); }
   .cards, .chart-grid, .run-grid, .foot-grid { grid-template-columns: 1fr; }
   .search { margin-left: 0; width: 100%; }
   .search input { width: 100%; }
-  .board thead th { top: 60px; }
+  /* On small screens the table scrolls horizontally; the sticky thead
+     stays in normal flow there (no overlap), pinning is desktop-only. */
+  .table-scroll { overflow-x: auto; }
+  .board thead { position: static; }
 }
