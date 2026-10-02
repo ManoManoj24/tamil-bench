@@ -1,5 +1,7 @@
 # tamil-bench — Runnable Tamil LLM bench for API-only models
 
+> **Fork note:** this is a usability fork of [LogicIncZo/tamil-bench](https://github.com/LogicIncZo/tamil-bench) (MIT), maintained by [ManoManoj24](https://github.com/ManoManoj24). All benchmark credit goes to Srikanth / CashlessConsumer — this fork only makes the runner easier to install, resume, and test.
+
 Zero-setup generative eval runner for OpenAI-compatible chat endpoints (OpenRouter default). Built because lm-eval MCQ tasks need loglikelihood (chat APIs don't return it) and SEA-HELM's harness needs vLLM/GPU.
 
 **Live scoreboard (bilingual English + Tamil, ELI5 + scores):** https://logicinczo.github.io/tamil-bench/ — served from `index.html` via GitHub Pages.
@@ -14,20 +16,52 @@ Zero-setup generative eval runner for OpenAI-compatible chat endpoints (OpenRout
 
 Individual sortable score tables are published at [`milu.html`](https://logicinczo.github.io/tamil-bench/milu.html), [`indicqa.html`](https://logicinczo.github.io/tamil-bench/indicqa.html), and [`indicxnli.html`](https://logicinczo.github.io/tamil-bench/indicxnli.html). Each shows the latest qualifying score per model, result-sheet date, valid sample count, errors, and confidence interval.
 
+## Setup
+
+```bash
+git clone https://github.com/ManoManoj24/tamil-bench.git
+cd tamil-bench
+pip install -r requirements.txt
+export OPENROUTER_API_KEY=sk-or-...   # get one at https://openrouter.ai/keys
+```
+
+MILU is gated on Hugging Face — accept the gate at
+https://huggingface.co/datasets/ai4bharat/MILU, then:
+
+```bash
+export HF_TOKEN=hf_...   # bench.py downloads data/milu_ta_test.parquet for you
+```
+
+No key and just want to try the pipeline? Use `--dry-run` (no key, no
+downloads — it synthesizes tiny local datasets):
+
+```bash
+python3 bench.py --dry-run all --model demo/x --n 5
+python3 build_site.py --no-push
+```
+
 ## Usage
 
 ```bash
-cd /home/workspace/ThamizhKanimai/nlp/tamil-bench
 python3 bench.py indicqa --model z-ai/glm-5.3-flash --n 100
 python3 bench.py milu --model deepseek/deepseek-v4.1-flash --n 200   # after gate accept
 python3 bench.py xnli --model google/gemini-3.8-flash --n 200
+python3 bench.py all --model x-ai/grok-4.7 --n 200   # all three tasks, in sequence
 python3 bench.py indicqa --model x-ai/grok-4.7 --n 5  # smoke-test before a full run
-python3 bench.py xnli --model z-ai/glm-5.3-flash --n 200                 # needs data/ta/test-00000-of-00001.parquet
+python3 bench.py --list-models                        # what can I run? (needs key)
 ```
 
 - `--n` stratified sample size (seed 42, reproducible); omit for full dataset.
-- `--workers` concurrency (default 8). `--endpoint` to override (any OpenAI-compatible URL + env key).
+- `--workers` concurrency (default 8).
+- `--dry-run` (before the subcommand) skips real API calls and synthesizes
+  fake answers, so the whole run → results → site pipeline works with no key.
+  Dry-run writes real files into `results/` — delete the `*_dryrun_*` sheets
+  afterwards if you don't want them near real data.
 - Uses `OPENROUTER_API_KEY` from env. Results: JSONL per question + summary in `results/`.
+- **Resumable:** answers are appended to `results/<task>_<model>_n<N>.jsonl` as
+  they arrive. Kill a run mid-way and re-run the same command — answered
+  questions are skipped, the rest continue. A tqdm progress bar shows while it
+  runs (falls back to print-every-N if tqdm isn't installed).
 
 ## Baseline (2026-09-11/12, OpenRouter, 0-shot, n≈200 stratified by domain)
 

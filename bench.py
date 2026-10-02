@@ -12,11 +12,20 @@ Usage:
   python3 bench.py indicqa --model z-ai/glm-5.3-flash --n 100
   python3 bench.py milu --model deepseek/deepseek-v4.1-flash --n 200 --shots 5
   python3 bench.py xnli --model google/gemini-3.8-flash --n 200
+  python3 bench.py all --model z-ai/glm-5.3-flash --n 200   # all three, in sequence
+
+Setup: pip install -r requirements.txt, then export OPENROUTER_API_KEY.
+No key handy? Add --dry-run (before the subcommand) to test the whole
+pipeline with fake answers: python3 bench.py --dry-run all --model demo/x --n 5
+
+Runs are resumable: results are appended to results/<task>_<model>_n<N>.jsonl
+as answers arrive, and a re-run skips questions already answered in that file.
 """
 
 import argparse
 import collections
 import json
+import os
 import re
 import sys
 import time
@@ -24,8 +33,18 @@ import unicodedata
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 
-import pandas as pd
-import requests
+try:
+    import pandas as pd
+except ImportError:
+    pd = None
+try:
+    import requests
+except ImportError:
+    requests = None
+try:
+    from tqdm import tqdm
+except ImportError:
+    tqdm = None
 
 BASE = Path(__file__).parent
 DATA = BASE / "data"
@@ -34,6 +53,17 @@ RESULTS.mkdir(exist_ok=True)
 SEED = 42
 
 OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions"
+OPENROUTER_MODELS_URL = "https://openrouter.ai/api/v1/models"
+
+# Set by --dry-run. When True, chat() returns a canned answer per task and
+# no API key is required.
+DRY_RUN = False
+DRY_TASK = None
+DRY_ANSWERS = {
+    "indicqa": "தமிழ் மாதிரி பதில்",
+    "milu": "B",
+    "xnli": "A",
+}
 
 # Reasoning-style models emit a long chain-of-thought before the answer. The
 # 512-token default truncates them mid-thought, and the truncated text still
@@ -50,14 +80,106 @@ def max_tokens_for(model):
 
 
 def load_key():
-    import os
     key = os.environ.get("OPENROUTER_API_KEY")
     if not key:
-        sys.exit("OPENROUTER_API_KEY not set")
+        sys.exit(
+            "OPENROUTER_API_KEY not set.\n"
+            "Get a key at https://openrouter.ai/keys and run:\n"
+            "  export OPENROUTER_API_KEY=sk-or-...\n"
+            "Just testing? Use --dry-run (no key needed):\n"
+            "  python3 bench.py --dry-run all --model demo/x --n 5"
+        )
     return key
 
 
+def check_environment(args):
+    """Fail fast with actionable messages: deps, key, and (per-task) data files."""
+    missing = []
+    if pd is None:
+        missing.append("pandas")
+    if requests is None:
+        missing.append("requests")
+    try:
+        import pyarrow  # noqa: F401
+    except ImportError:
+        missing.append("pyarrow")
+    if missing:
+        sys.exit(
+            "Missing Python packages: " + ", ".join(missing) + "\n"
+            "Install them with: pip install -r requirements.txt"
+        )
+    return load_key() if not args.dry_run else None
+
+
+def load_existing(path):
+    """Return (done, idless): done maps str(question id) -> record for records
+    that carry an "id"; idless counts records without one (old file format)."""
+    done = {}
+    idless = 0
+    if path.exists():
+        with open(path, encoding="utf-8") as f:
+            for line in f:
+                line = line.strip()
+                if not line:
+                    continue
+                try:
+                    r = json.loads(line)
+                except json.JSONDecodeError:
+                    continue
+                if r.get("id") is None:
+                    idless += 1
+                else:
+                    done[str(r["id"])] = r
+    return done, idless
+
+
+def make_progress(total, every=20, desc=""):
+    """tqdm progress bar, falling back to print-every-N when tqdm is missing."""
+    if tqdm is not None:
+        return tqdm(total=total, desc=desc, unit="q")
+    class _Fallback:
+        def __init__(self):
+            self.i = 0
+        def update(self, n=1):
+            self.i += n
+            if self.i % every == 0 or self.i == total:
+                print(f"  {self.i}/{total}")
+        def close(self):
+            pass
+    return _Fallback()
+
+
+def list_models(key):
+    if DRY_RUN:
+        print("5 models (dry-run sample):")
+        for mid in ("dryrun/alpha", "dryrun/beta", "google/gemini-3.8-flash",
+                    "deepseek/deepseek-v4.1-flash", "z-ai/glm-5.3-flash"):
+            print(" ", mid)
+        return
+    r = requests.get(
+        OPENROUTER_MODELS_URL,
+        headers={"Authorization": f"Bearer {key}"},
+        timeout=30,
+    )
+    r.raise_for_status()
+    ids = sorted(m["id"] for m in r.json().get("data", []) if m.get("id"))
+    print(f"{len(ids)} models on OpenRouter:")
+    for mid in ids:
+        print(" ", mid)
+
+
 def chat(model, messages, key, max_tokens=None, max_retries=6):
+    if DRY_RUN:
+        time.sleep(0.02)
+        return DRY_ANSWERS.get(DRY_TASK, "A"), {
+            "prompt_tokens": 10,
+            "completion_tokens": 2,
+            "cost": 0.0,
+            "finish_reason": "stop",
+            "truncated": False,
+            "max_tokens": max_tokens,
+            "dry_run": True,
+        }
     if max_tokens is None:
         max_tokens = max_tokens_for(model)
     for attempt in range(max_retries):
@@ -182,12 +304,34 @@ QA_USER = (
 
 
 def run_indicqa(args, key):
+    global DRY_TASK
+    DRY_TASK = "indicqa"
+    data_path = DATA / "indicqa.ta.json"
+    if DRY_RUN:
+        synth_dry_data("indicqa")
+    elif not data_path.exists():
+        sys.exit(
+            f"IndicQA data not found at {data_path}.\n"
+            "Download the Tamil split from https://github.com/AI4Bharat/IndicQA "
+            "(SQuAD-style JSON) and save it as data/indicqa.ta.json.\n"
+            "See README for details."
+        )
     rows = load_indicqa()
     rows = sorted(rows, key=lambda r: str(r["id"]))
     rng = __import__("random").Random(SEED)
     rng.shuffle(rows)
     subset = rows[: args.n]
+
+    slug = args.model.replace("/", "_")
+    path = RESULTS / f"indicqa_{slug}_n{len(subset)}.jsonl"
+    done, idless = load_existing(path)
+    if idless and not done:
+        print("Old results file has no question ids; restarting that file fresh.")
+        done = {}
+    todo = [r for r in subset if str(r["id"]) not in done]
     print(f"IndicQA-Tamil: {len(subset)} questions, model={args.model}")
+    if done:
+        print(f"  resuming: {len(done)} already answered, {len(todo)} remaining")
 
     def work(item):
         text, usage = chat(
@@ -207,30 +351,91 @@ def run_indicqa(args, key):
         best_f1 = max(f1, *(em_f1(text, g)[1] for g in item["golds"][1:])) if len(item["golds"]) > 1 else f1
         return {**item, "prediction": text, "em": em, "f1": best_f1, "usage": usage}
 
-    out = []
-    with ThreadPoolExecutor(max_workers=args.workers) as ex:
-        futs = {ex.submit(work, r): r["id"] for r in subset}
-        for i, fut in enumerate(as_completed(futs), 1):
-            out.append(fut.result())
-            if i % 20 == 0:
-                print(f"  {i}/{len(subset)}")
+    with open(path, "a" if done or path.exists() else "w", encoding="utf-8") as f:
+        pbar = make_progress(len(todo), every=20, desc="indicqa")
+        with ThreadPoolExecutor(max_workers=args.workers) as ex:
+            futs = {ex.submit(work, r): r for r in todo}
+            for fut in as_completed(futs):
+                r = fut.result()
+                f.write(json.dumps(r, ensure_ascii=False) + "\n")
+                f.flush()
+                done[str(r["id"])] = r
+                pbar.update(1)
+        pbar.close()
 
-    slug = args.model.replace("/", "_")
-    path = RESULTS / f"indicqa_{slug}_n{len(subset)}.jsonl"
-    out.sort(key=lambda r: str(r["id"]))
-    with open(path, "w") as f:
-        for r in out:
-            f.write(json.dumps(r, ensure_ascii=False) + "\n")
-
+    out = [done[str(r["id"])] for r in subset if str(r["id"]) in done]
     em = sum(r["em"] for r in out) / len(out)
     f1 = sum(r["f1"] for r in out) / len(out)
-    errs = sum(1 for r in out if r["prediction"].startswith("__ERROR__"))
+    errs = sum(1 for r in out if str(r["prediction"]).startswith("__ERROR__"))
     lo, hi = wilson(em, len(out))
     print(f"\nIndicQA-Tamil  model={args.model}  n={len(out)}  errors={errs}")
     print(f"EM: {em:.3f} (95% CI {lo:.3f}-{hi:.3f})   F1: {f1:.3f}")
     print(f"saved: {path}")
 
-XNLI_DATA = DATA / "indicxnli_ta_test.parquet"
+def xnli_data():
+    return DATA / "indicxnli_ta_test.parquet"
+
+
+def synth_dry_data(task):
+    """Create tiny synthetic datasets so --dry-run works with no downloads,
+    no keys, and no network. Never used by real runs."""
+    import random
+    rng = random.Random(SEED)
+    if task == "indicqa":
+        dest = DATA / "indicqa.ta.json"
+        if dest.exists():
+            return
+        contexts = [
+            ("சென்னை தமிழ்நாட்டின் தலைநகரம் ஆகும். இது வங்காள விரிகுடா கடற்கரையில் அமைந்துள்ளது.",
+             "தமிழ்நாட்டின் தலைநகரம் எது?", "சென்னை"),
+            ("திருக்குறள் திருவள்ளுவரால் இயற்றப்பட்டது. இதில் 1330 குறள்கள் உள்ளன.",
+             "திருக்குறளை இயற்றியவர் யார்?", "திருவள்ளுவர்"),
+            ("மதுரை வைகை ஆற்றங்கரையில் அமைந்த பழமையான நகரம். மீனாட்சி அம்மன் கோவில் இங்கு உள்ளது.",
+             "மதுரை எந்த ஆற்றங்கரையில் உள்ளது?", "வைகை"),
+            ("காவிரி தமிழ்நாட்டின் முக்கிய ஆறு. இது கர்நாடகாவில் உற்பத்தியாகிறது.",
+             "காவிரி எங்கு உற்பத்தியாகிறது?", "கர்நாடகா"),
+        ]
+        data = {"data": []}
+        for i in range(12):
+            ctx, q, a = contexts[i % len(contexts)]
+            data["data"].append({
+                "title": f"dry-{i}",
+                "paragraphs": [{
+                    "context": ctx,
+                    "qas": [{"id": f"dry-{i}", "question": q,
+                             "answers": [{"text": a, "answer_start": 0}]}],
+                }],
+            })
+        dest.write_text(json.dumps(data, ensure_ascii=False), encoding="utf-8")
+        print(f"dry-run: synthesized {dest}")
+    elif task == "xnli":
+        dest = xnli_data()
+        if dest.exists():
+            return
+        pairs = [
+            ("அவன் பள்ளிக்கு சென்றான்.", "அவன் வீட்டில் இருந்தான்.", 2),
+            ("மழை பெய்கிறது.", "வானம் மேகமூட்டமாக உள்ளது.", 1),
+            ("அவள் ஒரு மருத்துவர்.", "அவள் மருத்துவமனையில் வேலை செய்கிறாள்.", 1),
+            ("பூனை மரத்தில் ஏறியது.", "ஒரு விலங்கு மரத்தில் ஏறியது.", 0),
+        ]
+        rows = [{"premise": p, "hypothesis": h, "label": lab}
+                for i, (p, h, lab) in enumerate(pairs * 3)]
+        pd.DataFrame(rows).to_parquet(dest)
+        print(f"dry-run: synthesized {dest}")
+    elif task == "milu":
+        dest = DATA / "milu_ta_test.parquet"
+        if dest.exists():
+            return
+        letters = ["A", "B", "C", "D"]
+        rows = [{
+            "question": f"மாதிரி கேள்வி {i + 1}: தமிழ்நாட்டின் தலைநகரம் எது?",
+            "option_a": "கோயம்புத்தூர்", "option_b": "சென்னை",
+            "option_c": "மதுரை", "option_d": "திருச்சி",
+            "answer": letters[(i + 1) % 4],
+            "subject": "பொது அறிவு",
+        } for i in range(12)]
+        pd.DataFrame(rows).to_parquet(dest)
+        print(f"dry-run: synthesized {dest}")
 XNLI_LETTERS = ("A", "B", "C")
 XNLI_SYS = "You are a careful reasoner. Answer with the single letter A, B, or C."
 XNLI_USER = (
@@ -245,22 +450,37 @@ XNLI_USER = (
 
 
 def load_xnli():
-    df = pd.read_parquet(XNLI_DATA)
+    df = pd.read_parquet(xnli_data())
     df = df.sample(frac=1, random_state=SEED)
     return df.head(200)
 
 
 def run_xnli(args, key):
-    if not XNLI_DATA.exists():
+    global DRY_TASK
+    DRY_TASK = "xnli"
+    if DRY_RUN:
+        synth_dry_data("xnli")
+    elif not xnli_data().exists():
         sys.exit(
-            f"{XNLI_DATA} missing. Download the Tamil test split from "
+            f"{xnli_data()} missing. Download the Tamil test split from "
             "https://huggingface.co/datasets/AdaMLLab/indicxnli_repaired "
-            "(data/ta/test-00000-of-00001.parquet) and save it at that path."
+            "(data/ta/test-00000-of-00001.parquet) and save it at that path.\n"
+            "See README for details."
         )
     df = load_xnli()
     subset = df.head(args.n)
-    print(f"IndicXNLI-Tamil: {len(subset)} items, model={args.model}")
     label_map = {0: "A", 2: "B", 1: "C"}
+
+    slug = args.model.replace("/", "_")
+    path = RESULTS / f"xnli_{slug}_n{len(subset)}.jsonl"
+    done, idless = load_existing(path)
+    if idless and not done:
+        print("Old results file has no question ids; restarting that file fresh.")
+        done = {}
+    todo = [rec for rec in subset.iterrows() if str(int(rec[0])) not in done]
+    print(f"IndicXNLI-Tamil: {len(subset)} items, model={args.model}")
+    if done:
+        print(f"  resuming: {len(done)} already answered, {len(todo)} remaining")
 
     def work(rec):
         i, row = rec
@@ -300,22 +520,18 @@ def run_xnli(args, key):
                     return {"id": int(i), "prediction": f"__ERROR__ {exc}"}
                 time.sleep(2 ** (attempt + 1))
 
-    out = {}
-    with ThreadPoolExecutor(max_workers=args.workers) as ex:
-        futs = [ex.submit(work, rec) for rec in subset.iterrows()]
-        done = 0
-        for fut in as_completed(futs):
-            r = fut.result()
-            out[r["id"]] = r
-            done += 1
-            if done % 25 == 0:
-                print(f"  {done}/{len(subset)}")
-    rows = [out[i] for i in sorted(out)]
-    slug = args.model.replace("/", "_")
-    path = RESULTS / f"xnli_{slug}_n{len(rows)}.jsonl"
-    with open(path, "w") as f:
-        for r in rows:
-            f.write(json.dumps(r, ensure_ascii=False) + "\n")
+    with open(path, "a" if done or path.exists() else "w", encoding="utf-8") as f:
+        pbar = make_progress(len(todo), every=25, desc="xnli")
+        with ThreadPoolExecutor(max_workers=args.workers) as ex:
+            futs = [ex.submit(work, rec) for rec in todo]
+            for fut in as_completed(futs):
+                r = fut.result()
+                f.write(json.dumps(r, ensure_ascii=False) + "\n")
+                f.flush()
+                done[str(r["id"])] = r
+                pbar.update(1)
+        pbar.close()
+    rows = [done[str(int(i))] for i, _ in subset.iterrows() if str(int(i)) in done]
     k = sum(1 for r in rows if r.get("correct"))
     p = k / len(rows) if rows else 0
     print(f"Accuracy: {p:.3f}")
@@ -362,10 +578,21 @@ def milu_fields(df):
 
 
 def run_milu(args, key):
-    milu_download(load_hf_token())
+    global DRY_TASK
+    DRY_TASK = "milu"
     test_path = DATA / "milu_ta_test.parquet"
+    if DRY_RUN:
+        synth_dry_data("milu")
+    else:
+        milu_download(load_hf_token())
     if not test_path.exists():
-        sys.exit("MILU Tamil not downloaded. Accept the gate at https://huggingface.co/datasets/ai4bharat/MILU with your HF account, then retry.")
+        sys.exit(
+            "MILU Tamil not downloaded.\n"
+            "1. Accept the dataset gate at https://huggingface.co/datasets/ai4bharat/MILU (HF account needed)\n"
+            "2. Set your token: export HF_TOKEN=hf_...\n"
+            "3. Re-run — bench.py downloads data/milu_ta_test.parquet automatically.\n"
+            "See README for details."
+        )
     df = pd.read_parquet(test_path)
     opts, ansc, subj, q = milu_fields(df)
     if not opts or not ansc or not q:
@@ -406,9 +633,22 @@ def run_milu(args, key):
         )
     else:
         subset = df.head(args.n)
-    print(f"MILU-Tamil: {len(subset)} questions, model={args.model}, shots={len(shots)}")
 
-    def work(item):
+    slug = args.model.replace("/", "_")
+    path = RESULTS / f"milu_{slug}_n{len(subset)}.jsonl"
+    done, idless = load_existing(path)
+    if idless and not done:
+        # Pre-usability-fork sheets have no "id" field; can't resume those.
+        print("Old results file has no question ids; restarting that file fresh.")
+        done = {}
+    todo = [(i, row) for i, row in subset.iterrows()
+            if f"milu:{int(i)}" not in done]
+    print(f"MILU-Tamil: {len(subset)} questions, model={args.model}, shots={len(shots)}")
+    if done:
+        print(f"  resuming: {len(done)} already answered, {len(todo)} remaining")
+
+    def work(i, item):
+        qid = f"milu:{int(i)}"
         block = f"{item[q]}\n" + "\n".join(f"{k}. {item[opts[k]]}" for k in letters)
         text, usage = chat(
             args.model,
@@ -428,6 +668,7 @@ def run_milu(args, key):
         pred = parse_letter(text, strict=truncated)
         gold = answer_of(item)
         return {
+            "id": qid,
             "subject": str(item[subj]) if subj else "",
             "gold": gold,
             "prediction": text,
@@ -437,20 +678,20 @@ def run_milu(args, key):
             "usage": usage,
         }
 
-    out = []
-    with ThreadPoolExecutor(max_workers=args.workers) as ex:
-        futs = {ex.submit(work, row): i for i, row in subset.iterrows()}
-        for i, fut in enumerate(as_completed(futs), 1):
-            out.append(fut.result())
-            if i % 25 == 0:
-                print(f"  {i}/{len(subset)}")
+    with open(path, "a" if done or path.exists() else "w", encoding="utf-8") as f:
+        pbar = make_progress(len(todo), every=25, desc="milu")
+        with ThreadPoolExecutor(max_workers=args.workers) as ex:
+            futs = {ex.submit(work, i, row): i for i, row in todo}
+            for fut in as_completed(futs):
+                r = fut.result()
+                f.write(json.dumps(r, ensure_ascii=False) + "\n")
+                f.flush()
+                done[str(r["id"])] = r
+                pbar.update(1)
+        pbar.close()
 
-    slug = args.model.replace("/", "_")
-    path = RESULTS / f"milu_{slug}_n{len(out)}.jsonl"
-    with open(path, "w") as f:
-        for r in out:
-            f.write(json.dumps(r, ensure_ascii=False) + "\n")
-
+    out = [done[f"milu:{int(i)}"] for i, _ in subset.iterrows()
+           if f"milu:{int(i)}" in done]
     acc = sum(r["correct"] for r in out) / len(out)
     lo, hi = wilson(acc, len(out))
     print(f"\nMILU-Tamil  model={args.model}  n={len(out)}")
@@ -472,23 +713,53 @@ def load_hf_token():
 
 
 def main():
+    global DRY_RUN
     p = argparse.ArgumentParser(description=__doc__)
-    sub = p.add_subparsers(dest="bench", required=True)
-    for name in ("indicqa", "milu", "xnli"):
-        sp = sub.add_parser(name)
-        sp.add_argument("--model", required=True)
-        sp.add_argument("--n", type=int, default=100)
-        sp.add_argument("--workers", type=int, default=8)
-        if name == "milu":
-            sp.add_argument("--shots", type=int, default=5)
+    p.add_argument("--dry-run", action="store_true",
+                   help="skip real API calls; synthesize fake answers (no key needed). "
+                        "Put it before the subcommand: bench.py --dry-run all --model demo/x --n 5")
+    p.add_argument("--list-models", action="store_true",
+                   help="list available OpenRouter model ids and exit (needs OPENROUTER_API_KEY)")
+    sub = p.add_subparsers(dest="bench")
+    helps = {
+        "indicqa": "extractive QA (EM/F1)",
+        "milu": "exam MCQ (accuracy)",
+        "xnli": "3-way NLI (accuracy)",
+        "all": "run indicqa, milu and xnli in sequence for one model",
+    }
+    for name in ("indicqa", "milu", "xnli", "all"):
+        sp = sub.add_parser(name, help=helps[name])
+        sp.add_argument("--model", required=True, help="OpenRouter model id, e.g. z-ai/glm-5.3-flash")
+        sp.add_argument("--n", type=int, default=100,
+                        help="stratified sample size (seed 42, reproducible)")
+        sp.add_argument("--workers", type=int, default=8, help="API concurrency")
+        sp.add_argument("--dry-run", action="store_true",
+                        help="same as the global flag; also accepted after the subcommand")
+        if name in ("milu", "all"):
+            sp.add_argument("--shots", type=int, default=5,
+                            help="few-shot examples for milu (0 = zero-shot)")
     args = p.parse_args()
-    key = load_key()
+    DRY_RUN = args.dry_run
+    if args.list_models and DRY_RUN:
+        list_models(None)
+        return
+    if not args.bench and not args.list_models:
+        p.print_help()
+        sys.exit(2)
+    key = check_environment(args)
+    if args.list_models:
+        list_models(key)
+        return
     if args.bench == "indicqa":
         run_indicqa(args, key)
     elif args.bench == "xnli":
         run_xnli(args, key)
-    else:
+    elif args.bench == "milu":
         run_milu(args, key)
+    else:  # all
+        run_indicqa(args, key)
+        run_milu(args, key)
+        run_xnli(args, key)
 
 
 if __name__ == "__main__":
