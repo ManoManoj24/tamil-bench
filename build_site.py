@@ -128,7 +128,7 @@ def compute(data):
         cost, cost_covered = run_cost(rows)
         scores["milu"][model] = {
             "n": m, "n_errors": len(rows) - m, "n_truncated": trunc_count(valid), "accuracy": round(100 * k / m, 1),
-            "ci": [round(100 * lo, 1), round(100 * hi, 1)], "tested_on": sheet_date(filename),
+            "ci": [round(100 * lo, 1), round(100 * hi, 1)], "tested_on": sheet_date(filename), "sheet": filename,
             "cost": cost, "cost_covered": cost_covered, "cost_rows": len(rows),
         }
     for model, runs in data["indicqa"].items():
@@ -143,7 +143,7 @@ def compute(data):
         cost, cost_covered = run_cost(rows)
         scores["indicqa"][model] = {
             "n": m, "n_errors": len(rows) - m, "n_truncated": trunc_count(valid), "em": round(100 * em, 1), "f1": round(f1, 1),
-            "em_ci": [round(100 * lo, 1), round(100 * hi, 1)], "tested_on": sheet_date(filename),
+            "em_ci": [round(100 * lo, 1), round(100 * hi, 1)], "tested_on": sheet_date(filename), "sheet": filename,
             "cost": cost, "cost_covered": cost_covered, "cost_rows": len(rows),
         }
     for model, runs in data.get("xnli", {}).items():
@@ -157,7 +157,7 @@ def compute(data):
         cost, cost_covered = run_cost(rows)
         scores["xnli"][model] = {
             "n": m, "n_errors": len(rows) - m, "n_truncated": trunc_count(valid), "accuracy": round(100 * k / m, 1),
-            "ci": [round(100 * lo, 1), round(100 * hi, 1)], "tested_on": sheet_date(filename),
+            "ci": [round(100 * lo, 1), round(100 * hi, 1)], "tested_on": sheet_date(filename), "sheet": filename,
             "cost": cost, "cost_covered": cost_covered, "cost_rows": len(rows),
         }
     return scores
@@ -918,14 +918,115 @@ def charts(scores):
     for old in ("chart-milu.png", "chart-indicqa.png"):
         (OUT / old).unlink(missing_ok=True)
 
+def emit_scores_json(summary):
+    """Write data/scores.json: one normalized record per model for the SPA.
+
+    The static site (index.html + app.js) reads this file and renders the
+    leaderboard, charts, and model detail views from it. No HTML patching.
+    """
+    tasks_meta = {
+        "milu": {
+            "label": "MILU", "label_ta": "தேர்வு வினாக்கள்",
+            "metric": "accuracy", "higher_is_better": True,
+            "n_target": summary["tasks"]["milu"]["n_target"],
+            "description": "199 exam-style Tamil MCQs (AI4Bharat MILU Tamil split). Accuracy, 0-shot.",
+            "description_ta": "199 தமிழ் தேர்வு வினாக்கள் (MILU). சரியான விடைகளின் சதவீதம்.",
+        },
+        "indicqa": {
+            "label": "IndicQA", "label_ta": "வாசிப்புப் புரிதல்",
+            "metric": "f1", "higher_is_better": True,
+            "n_target": summary["tasks"]["indicqa"]["n_target"],
+            "description": "Extractive QA over Tamil Wikipedia passages (AI4Bharat IndicQA). Ranked by F1; exact-match shown too.",
+            "description_ta": "தமிழ் கட்டுரைகளிலிருந்து விடை எடுக்கும் வினாக்கள் (IndicQA). F1 அளவீடு.",
+        },
+        "indicxnli": {
+            "label": "IndicXNLI", "label_ta": "தர்க்க மதிப்பீடு",
+            "metric": "accuracy", "higher_is_better": True,
+            "n_target": summary["tasks"]["indicxnli"]["n_target"],
+            "description": "3-way natural-language inference in Tamil (entail / contradict / neutral). Accuracy, 0-shot.",
+            "description_ta": "தமிழில் மூவகை தர்க்க வினாக்கள் (XNLI). சரியான விடைகளின் சதவீதம்.",
+        },
+        "bluff": {
+            "label": "Bluff catch", "label_ta": "பொய் பிடிப்பு",
+            "metric": "bluff_rate", "higher_is_better": False,
+            "n_target": summary["tasks"]["indicqa_bluff"]["n_target"],
+            "description": "Unanswerable IndicQA questions: does the model abstain or bluff an answer? Lower bluff rate is better.",
+            "description_ta": "விடை இல்லாத வினாக்களில் மாதிரி பொய் சொல்கிறதா? குறைவான விகிதம் நல்லது.",
+        },
+    }
+    t = summary["tasks"]
+    milu, qa, xnli, bluff = (t["milu"]["models"], t["indicqa"]["models"],
+                            t["indicxnli"]["models"], t["indicqa_bluff"]["models"])
+    ids = sorted(set(milu) | set(qa) | set(xnli) | set(bluff))
+
+    def org_of(model_id):
+        return model_id.split("/")[0] if "/" in model_id else "unknown"
+
+    models = []
+    for mid in ids:
+        rec = {"id": mid,
+               "display_name": MODELS.get(mid, mid.split("/")[-1]),
+               "org": org_of(mid), "tasks": {}}
+        if mid in milu:
+            s = milu[mid]
+            rec["tasks"]["milu"] = {
+                "score": s["accuracy"], "ci_lo": s["ci"][0], "ci_hi": s["ci"][1],
+                "n": s["n"], "errors": s["n_errors"], "date": s["tested_on"],
+                "sheet": "results/" + s["sheet"]}
+        if mid in qa:
+            s = qa[mid]
+            rec["tasks"]["indicqa"] = {
+                "em": s["em"], "em_ci_lo": s["em_ci"][0], "em_ci_hi": s["em_ci"][1],
+                "f1": s["f1"], "n": s["n"], "errors": s["n_errors"], "date": s["tested_on"],
+                "sheet": "results/" + s["sheet"]}
+        if mid in xnli:
+            s = xnli[mid]
+            rec["tasks"]["indicxnli"] = {
+                "score": s["accuracy"], "ci_lo": s["ci"][0], "ci_hi": s["ci"][1],
+                "n": s["n"], "errors": s["n_errors"], "date": s["tested_on"],
+                "sheet": "results/" + s["sheet"]}
+        if mid in bluff:
+            s = bluff[mid]
+            rec["tasks"]["bluff"] = {
+                "bluff_rate": s["bluff_rate"], "abstain_rate": s["abstain_rate"],
+                "n_traps": s["n_traps"]}
+        parts = []
+        if "milu" in rec["tasks"]:
+            parts.append(rec["tasks"]["milu"]["score"])
+        if "indicqa" in rec["tasks"]:
+            parts.append(rec["tasks"]["indicqa"]["f1"])
+        if "indicxnli" in rec["tasks"]:
+            parts.append(rec["tasks"]["indicxnli"]["score"])
+        rec["overall"] = round(sum(parts) / len(parts), 1) if parts else None
+        models.append(rec)
+
+    scores = {
+        "meta": {
+            "generated_at": summary["generated"],
+            "bench": "tamil-bench",
+            "methodology_note": (
+                "Overall = mean of the model's available task scores "
+                "(MILU accuracy, IndicQA F1, IndicXNLI accuracy), each 0-100, "
+                "rounded to 1 decimal. Bluff rate is excluded: lower is better "
+                "there, so it can't average with accuracy-style metrics. "
+                "Models are ranked per task on that task's primary metric; "
+                "Overall ranks on the mean."
+            ),
+        },
+        "tasks": tasks_meta,
+        "models": models,
+    }
+    out = ROOT / "data" / "scores.json"
+    out.parent.mkdir(exist_ok=True)
+    out.write_text(json.dumps(scores, indent=2, ensure_ascii=False) + "\n")
+    print(f"wrote {out} ({len(models)} models)")
+
+
 def main():
     push = "--no-push" not in sys.argv
     data = load()
     scores = compute(data)
     bluff = bluff_scores(data)
-    xnli = xnli_scores(data)
-    generate_test_pages(scores)
-    generate_contribute_page(data)
     summary = {
         "generated": date.today().isoformat(),
         "bench": "tamil-bench",
@@ -948,8 +1049,7 @@ def main():
         },
     }
     (RESULTS / "summary.json").write_text(json.dumps(summary, indent=2, ensure_ascii=False) + "\n")
-    patch_html(scores, bluff, xnli)
-    charts(scores)
+    emit_scores_json(summary)
     print(f"milu models: {len(scores['milu'])}, indicqa models: {len(scores['indicqa'])}, "
           f"xnli models: {len(scores.get('xnli', {}))}, bluff models: {len(bluff)}")
     print(f"pending: {summary['pending']}")

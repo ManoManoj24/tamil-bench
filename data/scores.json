@@ -1,0 +1,734 @@
+{
+  "meta": {
+    "generated_at": "2026-10-02",
+    "bench": "tamil-bench",
+    "methodology_note": "Overall = mean of the model's available task scores (MILU accuracy, IndicQA F1, IndicXNLI accuracy), each 0-100, rounded to 1 decimal. Bluff rate is excluded: lower is better there, so it can't average with accuracy-style metrics. Models are ranked per task on that task's primary metric; Overall ranks on the mean."
+  },
+  "tasks": {
+    "milu": {
+      "label": "MILU",
+      "label_ta": "தேர்வு வினாக்கள்",
+      "metric": "accuracy",
+      "higher_is_better": true,
+      "n_target": 199,
+      "description": "199 exam-style Tamil MCQs (AI4Bharat MILU Tamil split). Accuracy, 0-shot.",
+      "description_ta": "199 தமிழ் தேர்வு வினாக்கள் (MILU). சரியான விடைகளின் சதவீதம்."
+    },
+    "indicqa": {
+      "label": "IndicQA",
+      "label_ta": "வாசிப்புப் புரிதல்",
+      "metric": "f1",
+      "higher_is_better": true,
+      "n_target": 100,
+      "description": "Extractive QA over Tamil Wikipedia passages (AI4Bharat IndicQA). Ranked by F1; exact-match shown too.",
+      "description_ta": "தமிழ் கட்டுரைகளிலிருந்து விடை எடுக்கும் வினாக்கள் (IndicQA). F1 அளவீடு."
+    },
+    "indicxnli": {
+      "label": "IndicXNLI",
+      "label_ta": "தர்க்க மதிப்பீடு",
+      "metric": "accuracy",
+      "higher_is_better": true,
+      "n_target": 200,
+      "description": "3-way natural-language inference in Tamil (entail / contradict / neutral). Accuracy, 0-shot.",
+      "description_ta": "தமிழில் மூவகை தர்க்க வினாக்கள் (XNLI). சரியான விடைகளின் சதவீதம்."
+    },
+    "bluff": {
+      "label": "Bluff catch",
+      "label_ta": "பொய் பிடிப்பு",
+      "metric": "bluff_rate",
+      "higher_is_better": false,
+      "n_target": 100,
+      "description": "Unanswerable IndicQA questions: does the model abstain or bluff an answer? Lower bluff rate is better.",
+      "description_ta": "விடை இல்லாத வினாக்களில் மாதிரி பொய் சொல்கிறதா? குறைவான விகிதம் நல்லது."
+    }
+  },
+  "models": [
+    {
+      "id": "anthropic/claude-sonnet-5.5",
+      "display_name": "Claude Sonnet 5.5",
+      "org": "anthropic",
+      "tasks": {
+        "milu": {
+          "score": 89.4,
+          "ci_lo": 84.4,
+          "ci_hi": 93.0,
+          "n": 199,
+          "errors": 0,
+          "date": "2026-10-02",
+          "sheet": "results/milu_anthropic_claude-sonnet-5.5_n199.jsonl"
+        },
+        "indicqa": {
+          "em": 22.0,
+          "em_ci_lo": 15.0,
+          "em_ci_hi": 31.1,
+          "f1": 43.1,
+          "n": 100,
+          "errors": 0,
+          "date": "2026-10-02",
+          "sheet": "results/indicqa_anthropic_claude-sonnet-5.5_n100.jsonl"
+        },
+        "indicxnli": {
+          "score": 75.5,
+          "ci_lo": 69.1,
+          "ci_hi": 80.9,
+          "n": 200,
+          "errors": 0,
+          "date": "2026-10-02",
+          "sheet": "results/xnli_anthropic_claude-sonnet-5.5_n200.jsonl"
+        },
+        "bluff": {
+          "bluff_rate": 63.0,
+          "abstain_rate": 37.0,
+          "n_traps": 27
+        }
+      },
+      "overall": 69.3
+    },
+    {
+      "id": "deepseek/deepseek-v4.1-flash",
+      "display_name": "DeepSeek V4.1 Flash",
+      "org": "deepseek",
+      "tasks": {
+        "milu": {
+          "score": 80.9,
+          "ci_lo": 74.9,
+          "ci_hi": 85.8,
+          "n": 199,
+          "errors": 0,
+          "date": "2026-09-11",
+          "sheet": "results/milu_deepseek_deepseek-v4.1-flash_n199.jsonl"
+        },
+        "indicqa": {
+          "em": 18.0,
+          "em_ci_lo": 11.7,
+          "em_ci_hi": 26.7,
+          "f1": 38.9,
+          "n": 100,
+          "errors": 0,
+          "date": "2026-09-11",
+          "sheet": "results/indicqa_deepseek_deepseek-v4.1-flash_n100.jsonl"
+        },
+        "indicxnli": {
+          "score": 62.0,
+          "ci_lo": 55.1,
+          "ci_hi": 68.4,
+          "n": 200,
+          "errors": 0,
+          "date": "2026-09-11",
+          "sheet": "results/xnli_deepseek_deepseek-v4.1-flash_n200.jsonl"
+        },
+        "bluff": {
+          "bluff_rate": 48.1,
+          "abstain_rate": 51.9,
+          "n_traps": 27
+        }
+      },
+      "overall": 60.6
+    },
+    {
+      "id": "google/gemini-3.8-flash",
+      "display_name": "Gemini 3.8 Flash",
+      "org": "google",
+      "tasks": {
+        "milu": {
+          "score": 94.5,
+          "ci_lo": 90.4,
+          "ci_hi": 96.9,
+          "n": 199,
+          "errors": 0,
+          "date": "2026-09-11",
+          "sheet": "results/milu_google_gemini-3.8-flash_n199.jsonl"
+        },
+        "indicqa": {
+          "em": 20.0,
+          "em_ci_lo": 13.3,
+          "em_ci_hi": 28.9,
+          "f1": 42.4,
+          "n": 100,
+          "errors": 0,
+          "date": "2026-09-11",
+          "sheet": "results/indicqa_google_gemini-3.8-flash_n100.jsonl"
+        },
+        "indicxnli": {
+          "score": 75.8,
+          "ci_lo": 69.3,
+          "ci_hi": 81.2,
+          "n": 198,
+          "errors": 2,
+          "date": "2026-09-11",
+          "sheet": "results/xnli_google_gemini-3.8-flash_n200.jsonl"
+        },
+        "bluff": {
+          "bluff_rate": 66.7,
+          "abstain_rate": 33.3,
+          "n_traps": 27
+        }
+      },
+      "overall": 70.9
+    },
+    {
+      "id": "google/gemma-4-26b-a4b-it:free",
+      "display_name": "Gemma 4 26B A4B",
+      "org": "google",
+      "tasks": {
+        "milu": {
+          "score": 58.3,
+          "ci_lo": 51.3,
+          "ci_hi": 64.9,
+          "n": 199,
+          "errors": 0,
+          "date": "2026-09-11",
+          "sheet": "results/milu_google_gemma-4-26b-a4b-it:free_n199.jsonl"
+        },
+        "indicqa": {
+          "em": 20.2,
+          "em_ci_lo": 13.3,
+          "em_ci_hi": 29.4,
+          "f1": 39.3,
+          "n": 94,
+          "errors": 6,
+          "date": "2026-09-11",
+          "sheet": "results/indicqa_google_gemma-4-26b-a4b-it:free_n100.jsonl"
+        },
+        "indicxnli": {
+          "score": 64.8,
+          "ci_lo": 57.8,
+          "ci_hi": 71.2,
+          "n": 193,
+          "errors": 7,
+          "date": "2026-09-11",
+          "sheet": "results/xnli_google_gemma-4-26b-a4b-it:free_n200.jsonl"
+        },
+        "bluff": {
+          "bluff_rate": 59.3,
+          "abstain_rate": 40.7,
+          "n_traps": 27
+        }
+      },
+      "overall": 54.1
+    },
+    {
+      "id": "inclusionai/ling-3.0-flash-vl:free",
+      "display_name": "Ling 3.0 Flash VL",
+      "org": "inclusionai",
+      "tasks": {
+        "milu": {
+          "score": 64.3,
+          "ci_lo": 57.5,
+          "ci_hi": 70.6,
+          "n": 199,
+          "errors": 0,
+          "date": "2026-09-11",
+          "sheet": "results/milu_inclusionai_ling-3.0-flash-vl:free_n199.jsonl"
+        },
+        "indicqa": {
+          "em": 14.0,
+          "em_ci_lo": 8.5,
+          "em_ci_hi": 22.1,
+          "f1": 37.4,
+          "n": 100,
+          "errors": 0,
+          "date": "2026-09-11",
+          "sheet": "results/indicqa_inclusionai_ling-3.0-flash-vl:free_n100.jsonl"
+        },
+        "bluff": {
+          "bluff_rate": 88.9,
+          "abstain_rate": 11.1,
+          "n_traps": 27
+        }
+      },
+      "overall": 50.8
+    },
+    {
+      "id": "liquid/lfm-2.5-2.6b:free",
+      "display_name": "Liquid LFM2.5 2.6B",
+      "org": "liquid",
+      "tasks": {
+        "milu": {
+          "score": 47.2,
+          "ci_lo": 40.4,
+          "ci_hi": 54.2,
+          "n": 199,
+          "errors": 0,
+          "date": "2026-10-02",
+          "sheet": "results/milu_liquid_lfm-2.5-2.6b:free_n199.jsonl"
+        },
+        "indicqa": {
+          "em": 18.0,
+          "em_ci_lo": 11.7,
+          "em_ci_hi": 26.7,
+          "f1": 35.3,
+          "n": 100,
+          "errors": 0,
+          "date": "2026-10-02",
+          "sheet": "results/indicqa_liquid_lfm-2.5-2.6b:free_n100.jsonl"
+        },
+        "indicxnli": {
+          "score": 64.6,
+          "ci_lo": 56.8,
+          "ci_hi": 71.6,
+          "n": 158,
+          "errors": 42,
+          "date": "2026-10-02",
+          "sheet": "results/xnli_liquid_lfm-2.5-2.6b:free_n200.jsonl"
+        },
+        "bluff": {
+          "bluff_rate": 88.9,
+          "abstain_rate": 11.1,
+          "n_traps": 27
+        }
+      },
+      "overall": 49.0
+    },
+    {
+      "id": "nex-agi/nex-n2.5-mini",
+      "display_name": "Nex N2.5 Mini",
+      "org": "nex-agi",
+      "tasks": {
+        "milu": {
+          "score": 67.3,
+          "ci_lo": 60.5,
+          "ci_hi": 73.5,
+          "n": 199,
+          "errors": 0,
+          "date": "2026-10-02",
+          "sheet": "results/milu_nex-agi_nex-n2.5-mini_n199.jsonl"
+        },
+        "indicqa": {
+          "em": 14.0,
+          "em_ci_lo": 8.5,
+          "em_ci_hi": 22.1,
+          "f1": 35.3,
+          "n": 100,
+          "errors": 0,
+          "date": "2026-10-02",
+          "sheet": "results/indicqa_nex-agi_nex-n2.5-mini_n100.jsonl"
+        },
+        "indicxnli": {
+          "score": 64.5,
+          "ci_lo": 57.7,
+          "ci_hi": 70.8,
+          "n": 200,
+          "errors": 0,
+          "date": "2026-10-02",
+          "sheet": "results/xnli_nex-agi_nex-n2.5-mini_n200.jsonl"
+        },
+        "bluff": {
+          "bluff_rate": 85.2,
+          "abstain_rate": 14.8,
+          "n_traps": 27
+        }
+      },
+      "overall": 55.7
+    },
+    {
+      "id": "nvidia/nemotron-3-super-120b-a12b:free",
+      "display_name": "Nemotron 3 Super 120B A12B",
+      "org": "nvidia",
+      "tasks": {
+        "milu": {
+          "score": 69.5,
+          "ci_lo": 62.6,
+          "ci_hi": 75.7,
+          "n": 187,
+          "errors": 12,
+          "date": "2026-10-02",
+          "sheet": "results/milu_nvidia_nemotron-3-super-120b-a12b:free_n199.jsonl"
+        }
+      },
+      "overall": 69.5
+    },
+    {
+      "id": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "display_name": "Nemotron 3 Ultra 550B A55B",
+      "org": "nvidia",
+      "tasks": {
+        "milu": {
+          "score": 69.3,
+          "ci_lo": 62.6,
+          "ci_hi": 75.3,
+          "n": 199,
+          "errors": 0,
+          "date": "2026-10-02",
+          "sheet": "results/milu_nvidia_nemotron-3-ultra-550b-a55b:free_n199.jsonl"
+        },
+        "indicqa": {
+          "em": 17.0,
+          "em_ci_lo": 10.9,
+          "em_ci_hi": 25.5,
+          "f1": 34.9,
+          "n": 100,
+          "errors": 0,
+          "date": "2026-10-02",
+          "sheet": "results/indicqa_nvidia_nemotron-3-ultra-550b-a55b:free_n100.jsonl"
+        },
+        "indicxnli": {
+          "score": 70.0,
+          "ci_lo": 63.3,
+          "ci_hi": 75.9,
+          "n": 200,
+          "errors": 0,
+          "date": "2026-10-02",
+          "sheet": "results/xnli_nvidia_nemotron-3-ultra-550b-a55b:free_n200.jsonl"
+        },
+        "bluff": {
+          "bluff_rate": 40.7,
+          "abstain_rate": 59.3,
+          "n_traps": 27
+        }
+      },
+      "overall": 58.1
+    },
+    {
+      "id": "nvidia/nemotron-3.5-lightning:free",
+      "display_name": "Nemotron 3.5 Lightning",
+      "org": "nvidia",
+      "tasks": {
+        "milu": {
+          "score": 43.7,
+          "ci_lo": 37.0,
+          "ci_hi": 50.7,
+          "n": 199,
+          "errors": 0,
+          "date": "2026-09-17",
+          "sheet": "results/milu_nvidia_nemotron-3.5-lightning:free_n199.jsonl"
+        },
+        "indicqa": {
+          "em": 1.0,
+          "em_ci_lo": 0.2,
+          "em_ci_hi": 5.4,
+          "f1": 3.5,
+          "n": 100,
+          "errors": 0,
+          "date": "2026-09-17",
+          "sheet": "results/indicqa_nvidia_nemotron-3.5-lightning:free_n100.jsonl"
+        },
+        "bluff": {
+          "bluff_rate": 88.9,
+          "abstain_rate": 11.1,
+          "n_traps": 27
+        }
+      },
+      "overall": 23.6
+    },
+    {
+      "id": "openai/gpt-5.6-luna",
+      "display_name": "GPT-5.6 Luna",
+      "org": "openai",
+      "tasks": {
+        "milu": {
+          "score": 86.4,
+          "ci_lo": 81.0,
+          "ci_hi": 90.5,
+          "n": 199,
+          "errors": 0,
+          "date": "2026-09-11",
+          "sheet": "results/milu_openai_gpt-5.6-luna_n199.jsonl"
+        },
+        "indicqa": {
+          "em": 17.0,
+          "em_ci_lo": 10.9,
+          "em_ci_hi": 25.5,
+          "f1": 40.7,
+          "n": 100,
+          "errors": 0,
+          "date": "2026-09-11",
+          "sheet": "results/indicqa_openai_gpt-5.6-luna_n100.jsonl"
+        },
+        "indicxnli": {
+          "score": 61.0,
+          "ci_lo": 54.1,
+          "ci_hi": 67.5,
+          "n": 200,
+          "errors": 0,
+          "date": "2026-09-11",
+          "sheet": "results/xnli_openai_gpt-5.6-luna_n200.jsonl"
+        },
+        "bluff": {
+          "bluff_rate": 88.9,
+          "abstain_rate": 11.1,
+          "n_traps": 27
+        }
+      },
+      "overall": 62.7
+    },
+    {
+      "id": "openai/gpt-6-luna",
+      "display_name": "GPT-6 Luna",
+      "org": "openai",
+      "tasks": {
+        "milu": {
+          "score": 87.8,
+          "ci_lo": 82.5,
+          "ci_hi": 91.7,
+          "n": 197,
+          "errors": 2,
+          "date": "2026-10-02",
+          "sheet": "results/milu_openai_gpt-6-luna_n199.jsonl"
+        },
+        "indicqa": {
+          "em": 16.0,
+          "em_ci_lo": 10.1,
+          "em_ci_hi": 24.4,
+          "f1": 40.5,
+          "n": 100,
+          "errors": 0,
+          "date": "2026-10-02",
+          "sheet": "results/indicqa_openai_gpt-6-luna_n100.jsonl"
+        },
+        "indicxnli": {
+          "score": 65.0,
+          "ci_lo": 58.2,
+          "ci_hi": 71.3,
+          "n": 200,
+          "errors": 0,
+          "date": "2026-10-02",
+          "sheet": "results/xnli_openai_gpt-6-luna_n200.jsonl"
+        },
+        "bluff": {
+          "bluff_rate": 88.9,
+          "abstain_rate": 11.1,
+          "n_traps": 27
+        }
+      },
+      "overall": 64.4
+    },
+    {
+      "id": "openai/gpt-oss-20b",
+      "display_name": "GPT-OSS 20B",
+      "org": "openai",
+      "tasks": {
+        "milu": {
+          "score": 61.8,
+          "ci_lo": 54.9,
+          "ci_hi": 68.3,
+          "n": 199,
+          "errors": 0,
+          "date": "2026-10-02",
+          "sheet": "results/milu_openai_gpt-oss-20b_n199.jsonl"
+        },
+        "indicqa": {
+          "em": 20.0,
+          "em_ci_lo": 13.3,
+          "em_ci_hi": 28.9,
+          "f1": 40.7,
+          "n": 100,
+          "errors": 0,
+          "date": "2026-10-02",
+          "sheet": "results/indicqa_openai_gpt-oss-20b_n100.jsonl"
+        },
+        "indicxnli": {
+          "score": 62.0,
+          "ci_lo": 55.1,
+          "ci_hi": 68.4,
+          "n": 200,
+          "errors": 0,
+          "date": "2026-10-02",
+          "sheet": "results/xnli_openai_gpt-oss-20b_n200.jsonl"
+        },
+        "bluff": {
+          "bluff_rate": 70.4,
+          "abstain_rate": 29.6,
+          "n_traps": 27
+        }
+      },
+      "overall": 54.8
+    },
+    {
+      "id": "poolside/laguna-s-2.1:free",
+      "display_name": "Poolside Laguna-S 2.1",
+      "org": "poolside",
+      "tasks": {
+        "milu": {
+          "score": 53.5,
+          "ci_lo": 46.3,
+          "ci_hi": 60.6,
+          "n": 185,
+          "errors": 14,
+          "date": "2026-09-11",
+          "sheet": "results/milu_poolside_laguna-s-2.1:free_n199.jsonl"
+        },
+        "indicqa": {
+          "em": 15.4,
+          "em_ci_lo": 9.4,
+          "em_ci_hi": 24.2,
+          "f1": 32.0,
+          "n": 91,
+          "errors": 9,
+          "date": "2026-09-11",
+          "sheet": "results/indicqa_poolside_laguna-s-2.1:free_n100.jsonl"
+        },
+        "bluff": {
+          "bluff_rate": 85.2,
+          "abstain_rate": 14.8,
+          "n_traps": 27
+        }
+      },
+      "overall": 42.8
+    },
+    {
+      "id": "qwen/qwen3.8-flash",
+      "display_name": "Qwen 3.8 Flash",
+      "org": "qwen",
+      "tasks": {
+        "milu": {
+          "score": 68.8,
+          "ci_lo": 62.1,
+          "ci_hi": 74.9,
+          "n": 199,
+          "errors": 0,
+          "date": "2026-09-11",
+          "sheet": "results/milu_qwen_qwen3.8-flash_n199.jsonl"
+        },
+        "indicqa": {
+          "em": 22.0,
+          "em_ci_lo": 15.0,
+          "em_ci_hi": 31.1,
+          "f1": 38.1,
+          "n": 100,
+          "errors": 0,
+          "date": "2026-09-11",
+          "sheet": "results/indicqa_qwen_qwen3.8-flash_n100.jsonl"
+        },
+        "indicxnli": {
+          "score": 63.0,
+          "ci_lo": 56.1,
+          "ci_hi": 69.4,
+          "n": 200,
+          "errors": 0,
+          "date": "2026-09-11",
+          "sheet": "results/xnli_qwen_qwen3.8-flash_n200.jsonl"
+        },
+        "bluff": {
+          "bluff_rate": 70.4,
+          "abstain_rate": 29.6,
+          "n_traps": 27
+        }
+      },
+      "overall": 56.6
+    },
+    {
+      "id": "stealth/space-bunny-alpha",
+      "display_name": "Space Bunny Alpha",
+      "org": "stealth",
+      "tasks": {
+        "milu": {
+          "score": 60.8,
+          "ci_lo": 53.9,
+          "ci_hi": 67.3,
+          "n": 199,
+          "errors": 0,
+          "date": "2026-10-02",
+          "sheet": "results/milu_stealth_space-bunny-alpha_n199.jsonl"
+        },
+        "indicqa": {
+          "em": 21.0,
+          "em_ci_lo": 14.2,
+          "em_ci_hi": 30.0,
+          "f1": 39.6,
+          "n": 100,
+          "errors": 0,
+          "date": "2026-10-02",
+          "sheet": "results/indicqa_stealth_space-bunny-alpha_n100.jsonl"
+        },
+        "indicxnli": {
+          "score": 62.0,
+          "ci_lo": 55.1,
+          "ci_hi": 68.4,
+          "n": 200,
+          "errors": 0,
+          "date": "2026-10-02",
+          "sheet": "results/xnli_stealth_space-bunny-alpha_n200.jsonl"
+        },
+        "bluff": {
+          "bluff_rate": 88.9,
+          "abstain_rate": 11.1,
+          "n_traps": 27
+        }
+      },
+      "overall": 54.1
+    },
+    {
+      "id": "xiaomi/mimo-v2.5",
+      "display_name": "Xiaomi MiMo v2.5",
+      "org": "xiaomi",
+      "tasks": {
+        "milu": {
+          "score": 75.9,
+          "ci_lo": 69.5,
+          "ci_hi": 81.3,
+          "n": 199,
+          "errors": 0,
+          "date": "2026-09-11",
+          "sheet": "results/milu_xiaomi_mimo-v2.5_n199.jsonl"
+        },
+        "indicqa": {
+          "em": 20.0,
+          "em_ci_lo": 13.3,
+          "em_ci_hi": 28.9,
+          "f1": 40.1,
+          "n": 100,
+          "errors": 0,
+          "date": "2026-09-11",
+          "sheet": "results/indicqa_xiaomi_mimo-v2.5_n100.jsonl"
+        },
+        "indicxnli": {
+          "score": 60.5,
+          "ci_lo": 53.6,
+          "ci_hi": 67.0,
+          "n": 200,
+          "errors": 0,
+          "date": "2026-09-11",
+          "sheet": "results/xnli_xiaomi_mimo-v2.5_n200.jsonl"
+        },
+        "bluff": {
+          "bluff_rate": 74.1,
+          "abstain_rate": 25.9,
+          "n_traps": 27
+        }
+      },
+      "overall": 58.8
+    },
+    {
+      "id": "z-ai/glm-5.3-flash",
+      "display_name": "GLM 5.3 Flash",
+      "org": "z-ai",
+      "tasks": {
+        "milu": {
+          "score": 79.9,
+          "ci_lo": 73.8,
+          "ci_hi": 84.9,
+          "n": 199,
+          "errors": 0,
+          "date": "2026-09-11",
+          "sheet": "results/milu_z-ai_glm-5.3-flash_n199.jsonl"
+        },
+        "indicqa": {
+          "em": 19.0,
+          "em_ci_lo": 12.5,
+          "em_ci_hi": 27.8,
+          "f1": 36.8,
+          "n": 100,
+          "errors": 0,
+          "date": "2026-09-11",
+          "sheet": "results/indicqa_z-ai_glm-5.3-flash_n100.jsonl"
+        },
+        "indicxnli": {
+          "score": 71.5,
+          "ci_lo": 64.9,
+          "ci_hi": 77.3,
+          "n": 200,
+          "errors": 0,
+          "date": "2026-09-11",
+          "sheet": "results/xnli_z-ai_glm-5.3-flash_n200.jsonl"
+        },
+        "bluff": {
+          "bluff_rate": 74.1,
+          "abstain_rate": 25.9,
+          "n_traps": 27
+        }
+      },
+      "overall": 62.7
+    }
+  ]
+}

@@ -4,7 +4,7 @@
 
 Zero-setup generative eval runner for OpenAI-compatible chat endpoints (OpenRouter default). Built because lm-eval MCQ tasks need loglikelihood (chat APIs don't return it) and SEA-HELM's harness needs vLLM/GPU.
 
-**Live scoreboard (bilingual English + Tamil, ELI5 + scores):** https://logicinczo.github.io/tamil-bench/ — served from `index.html` via GitHub Pages.
+**Live scoreboard (this fork):** https://tamil-bench-manomanoj24.vercel.app/ — data-driven SPA (`index.html` + `app.js` reading `data/scores.json`). Upstream's original exam-paper site: https://logicinczo.github.io/tamil-bench/.
 
 ## Benchmarks
 
@@ -118,9 +118,21 @@ earlier), so they are parked on this table rather than shown as 0%.
 `python3 build_site.py [--no-push]` is the single repeatable refresh command:
 it rescans `results/*.jsonl`, recomputes scores (identical math to `bench.py` —
 errors count as wrong and stay in the denominator), rewrites
-`results/summary.json`, regenerates the comparison charts in `assets/`, and
-patches the scoreboard tables in `index.html` between the
-`<!--ROWS:TASK:TIER-->` markers, then commits/pushes unless `--no-push`.
+`results/summary.json`, and emits `data/scores.json` — one normalized record
+per model (per-task score, 95% CI, valid n, errors, run date, source sheet
+filename, plus an `overall` mean). The static site (`index.html` +
+`styles.css` + `app.js`) is data-driven: it fetches `data/scores.json` and
+renders the leaderboard, charts, and model report cards client-side — no HTML
+patching, no build step. Then it commits/pushes unless `--no-push`.
+
+`data/scores.json` is the one generated file committed to git (see the
+`.gitignore` exception); raw datasets under `data/` stay ignored.
+
+**Overall score:** mean of the model's available task scores (MILU accuracy,
+IndicQA F1, IndicXNLI accuracy), each 0–100, rounded to 1 decimal. Bluff rate
+is excluded — lower is better there, so it can't average with accuracy-style
+metrics. The formula is documented in `data/scores.json` (`meta.methodology_note`)
+and on the site.
 
 ## Data sources & attribution
 
