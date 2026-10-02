@@ -57,6 +57,7 @@
       <h1><span data-i18n="hero.h1a">How well do AI models</span><br><span class="accent" data-i18n="hero.h1b">know Tamil?</span></h1>
       <p class="lede" data-i18n="hero.lede">We sit AI models for Tamil exams — multiple-choice, reading comprehension, logic — and publish the marks. Every score is auditable down to the individual answer.</p>
       <p class="lede ta" lang="ta">AI மாதிரிகளுக்குத் தமிழில் தேர்வு வைத்து மதிப்பெண்களை வெளியிடுகிறோம். ஒவ்வொரு மதிப்பெண்ணையும் தனித்தனி விடைகள் வரை சரிபார்க்கலாம்.</p>
+      <p class="credit-line" data-i18n="hero.credit">Original bench by <a href="https://github.com/LogicIncZo/tamil-bench">Srikanth · CashlessConsumer (ThamizhKanimai)</a> · <a href="https://x.com/logic">@logic on X</a></p>
       <div class="stats" id="stats">
         <div class="stat"><span class="stat-num" id="statModels">–</span><span class="stat-lbl" data-i18n="stat.models">models evaluated</span></div>
         <div class="stat"><span class="stat-num" id="statQuestions">–</span><span class="stat-lbl" data-i18n="stat.questions">questions in the exam</span></div>
@@ -122,8 +123,16 @@
       </div>
       <div class="card">
         <h3 data-i18n="method.c3h">The Overall score</h3>
-        <p data-i18n="method.c3a">Overall is the mean of a model's available task scores — MILU accuracy, IndicQA F1, IndicXNLI accuracy — each on a 0–100 scale, rounded to one decimal.</p>
+        <p data-i18n="method.c3a">Overall is the mean of the three core task scores — MILU accuracy, IndicQA F1, IndicXNLI accuracy — each on a 0–100 scale, rounded to one decimal. A model missing any core task gets no Overall and is listed below the ranked models as partial.</p>
         <p data-i18n="method.c3b">Bluff rate is excluded: lower is better there, so it can't average with accuracy-style metrics. It has its own tab.</p>
+      </div>
+      <div class="card">
+        <h3 data-i18n="method.c4h">Credits</h3>
+        <ul>
+          <li data-i18n="method.c4a">Original bench: <b>Srikanth</b> (CashlessConsumer, ThamizhKanimai) — <a href="https://github.com/LogicIncZo/tamil-bench">repo</a> · <a href="https://x.com/logic">X</a>.</li>
+          <li data-i18n="method.c4b">Datasets: AI4Bharat <b>MILU</b>, AI4Bharat <b>IndicQA</b>, AdaMLLab <b>IndicXNLI</b> (repaired mirror of AI4Bharat's IndicXNLI).</li>
+          <li data-i18n="method.c4c">This fork: <b>ManoManoj24</b> — usability improvements + leaderboard rebuild (MIT).</li>
+        </ul>
       </div>
     </div>
   </section>

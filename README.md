@@ -128,11 +128,12 @@ patching, no build step. Then it commits/pushes unless `--no-push`.
 `data/scores.json` is the one generated file committed to git (see the
 `.gitignore` exception); raw datasets under `data/` stay ignored.
 
-**Overall score:** mean of the model's available task scores (MILU accuracy,
-IndicQA F1, IndicXNLI accuracy), each 0–100, rounded to 1 decimal. Bluff rate
-is excluded — lower is better there, so it can't average with accuracy-style
-metrics. The formula is documented in `data/scores.json` (`meta.methodology_note`)
-and on the site.
+**Overall score:** mean of the model's three core task scores (MILU accuracy,
+IndicQA F1, IndicXNLI accuracy), each 0–100, rounded to 1 decimal. A model
+missing any core task gets no Overall and is listed as partial below the
+ranked models. Bluff rate is excluded — lower is better there, so it can't
+average with accuracy-style metrics. The formula is documented in
+`data/scores.json` (`meta.methodology_note`) and on the site.
 
 ## Data sources & attribution
 

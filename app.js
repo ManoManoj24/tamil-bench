@@ -20,6 +20,7 @@
       "hero.eyebrow": "Open benchmark · API-only · No GPU needed",
       "hero.h1a": "How well do AI models", "hero.h1b": "know Tamil?",
       "hero.lede": "We sit AI models for Tamil exams — multiple-choice, reading comprehension, logic — and publish the marks. Every score is auditable down to the individual answer.",
+      "hero.credit": "Original bench by <a href=\"https://github.com/LogicIncZo/tamil-bench\">Srikanth · CashlessConsumer (ThamizhKanimai)</a> · <a href=\"https://x.com/logic\">@logic on X</a>",
       "stat.models": "models evaluated", "stat.questions": "questions in the exam",
       "stat.tasks": "tasks", "stat.updated": "last updated",
       "board.h2": "Leaderboard", "board.sub": "Click a column to sort. Click a model for its full report card.",
@@ -36,8 +37,12 @@
       "method.c2c": "API errors and unparseable answers count as wrong — they stay in the denominator.",
       "method.c2d": "95% Wilson confidence intervals on every accuracy-style score.",
       "method.c2e": "API-only models, no GPUs. Every answer sheet is saved in the repo.",
-      "method.c3a": "Overall is the mean of a model's available task scores — MILU accuracy, IndicQA F1, IndicXNLI accuracy — each on a 0–100 scale, rounded to one decimal.",
+      "method.c3a": "Overall is the mean of the three core task scores — MILU accuracy, IndicQA F1, IndicXNLI accuracy — each on a 0–100 scale, rounded to one decimal. A model missing any core task gets no Overall and is listed below the ranked models as partial.",
       "method.c3b": "Bluff rate is excluded: lower is better there, so it can't average with accuracy-style metrics. It has its own tab.",
+      "method.c4h": "Credits",
+      "method.c4a": "Original bench: <b>Srikanth</b> (CashlessConsumer, ThamizhKanimai) — <a href=\"https://github.com/LogicIncZo/tamil-bench\">repo</a> · <a href=\"https://x.com/logic\">X</a>.",
+      "method.c4b": "Datasets: AI4Bharat <b>MILU</b>, AI4Bharat <b>IndicQA</b>, AdaMLLab <b>IndicXNLI</b> (repaired mirror of AI4Bharat's IndicXNLI).",
+      "method.c4c": "This fork: <b>ManoManoj24</b> — usability improvements + leaderboard rebuild (MIT).",
       "eli5.h2": "What is Tamil Bench?",
       "eli5.p1": "AI chatbots are tested on English constantly, and on a handful of other big languages. Tamil — spoken by ~85 million people — usually gets one line in a table, if it appears at all. Tamil Bench fixes the measuring stick: three exams, entirely in Tamil script, marks published for all to see.",
       "eli5.p2": "Think of it as a report card. Anyone can re-run the exam on any model through its API — no GPU, a few dollars at most — and every answer sheet is saved in the repo, so no score is taken on trust.",
@@ -56,6 +61,7 @@
       "hero.eyebrow": "திறந்த அளவுகோல் · API மட்டும் · GPU தேவையில்லை",
       "hero.h1a": "AI மாதிரிகளுக்கு", "hero.h1b": "தமிழ் எவ்வளவு தெரியும்?",
       "hero.lede": "AI மாதிரிகளைத் தமிழ்த் தேர்வுகளில் உட்கார வைத்து மதிப்பெண்களை வெளியிடுகிறோம் — பல்தேர்வு, வாசிப்புப் புரிதல், தர்க்கம். ஒவ்வொரு மதிப்பெண்ணையும் சரிபார்க்கலாம்.",
+      "hero.credit": "அசல் தேர்வு: <a href=\"https://github.com/LogicIncZo/tamil-bench\">ஸ்ரீகாந்த் · CashlessConsumer (ThamizhKanimai)</a> · <a href=\"https://x.com/logic\">X-இல் @logic</a>",
       "stat.models": "மதிப்பிடப்பட்ட மாதிரிகள்", "stat.questions": "மொத்த வினாக்கள்",
       "stat.tasks": "தேர்வுகள்", "stat.updated": "புதுப்பிக்கப்பட்டது",
       "board.h2": "மதிப்பெண் பலகை", "board.sub": "வரிசைப்படுத்த நெடுவரிசையைச் சொடுக்குக. முழு அறிக்கைக்கு மாதிரியைச் சொடுக்குக.",
@@ -63,6 +69,12 @@
       "charts.h2": "விளக்கப்படங்கள்", "charts.sub": "ஒவ்வொரு தேர்விலும் அனைத்து மாதிரிகளும்.",
       "method.h2": "முறையியல்", "method.c1h": "தேர்வுகள்", "method.c2h": "விதிகள்",
       "method.c3h": "மொத்த மதிப்பெண்",
+      "method.c3a": "மொத்த மதிப்பெண் என்பது மூன்று முக்கிய தேர்வு மதிப்பெண்களின் சராசரி — MILU, IndicQA F1, XNLI — ஒவ்வொன்றும் 0–100. ஒரு தேர்வு இல்லாத மாதிரிக்கு மொத்த மதிப்பெண் இல்லை; அது 'பகுதி' எனக் கீழே குறிக்கப்படும்.",
+      "method.c3b": "பொய் விகிதம் சேர்க்கப்படவில்லை: அங்கு குறைவானது நல்லது, எனவே சராசரியில் சேராது. அதற்குத் தனி தாவல் உண்டு.",
+      "method.c4h": "நன்றிகள்",
+      "method.c4a": "அசல் தேர்வு: <b>ஸ்ரீகாந்த்</b> (CashlessConsumer, ThamizhKanimai) — <a href=\"https://github.com/LogicIncZo/tamil-bench\">repo</a> · <a href=\"https://x.com/logic\">X</a>.",
+      "method.c4b": "தரவுத் தொகுப்புகள்: AI4Bharat <b>MILU</b>, AI4Bharat <b>IndicQA</b>, AdaMLLab <b>IndicXNLI</b> (AI4Bharat IndicXNLI-இன் சரிசெய்யப்பட்ட நகல்).",
+      "method.c4c": "இந்த fork: <b>ManoManoj24</b> — பயன்பாட்டு மேம்பாடுகள் + மதிப்பெண் பலகை மறுவடிவமைப்பு (MIT).",
       "eli5.h2": "Tamil Bench என்றால் என்ன?",
       "run.h2": "நீங்களே இயக்குங்கள்", "run.sub": "ஒரு மாதிரி, மூன்று தேர்வுகள், ஒரே கட்டளை. OpenRouter API விசை தேவை.",
       "run.setup": "அமைப்பு", "run.copy": "நகலெடு", "run.bench": "தேர்வை இயக்குக", "run.copy2": "நகலெடு",
@@ -81,8 +93,9 @@
       col_milu: "MILU acc", col_f1: "IndicQA F1", col_em: "IndicQA EM", col_xnli: "XNLI acc",
       col_score: "Accuracy", col_ci: "95% CI", col_n: "n", col_err: "Errors", col_upd: "Updated",
       col_bluff: "Bluff rate", col_abstain: "Abstain", col_traps: "Traps",
-      note_overall: "Overall = mean of available task scores (MILU accuracy, IndicQA F1, XNLI accuracy). Bluff excluded — lower is better there.",
+      note_overall: "Overall needs all three tasks (MILU, IndicQA, XNLI) — models missing a task are listed below as partial.",
       note_bluff: "Lower bluff rate is better: on unanswerable questions, did the model abstain or invent an answer?",
+      partial: "partial", partial_missing: "Missing",
       click_model: "Report card", close: "Close",
       m_overall: "Overall", m_best: "Strongest", m_worst: "Weakest", m_of: "of",
       m_n: "questions", m_err: "errors", m_date: "tested", m_sheet: "answer sheet",
@@ -95,8 +108,9 @@
       col_milu: "MILU", col_f1: "IndicQA F1", col_em: "IndicQA EM", col_xnli: "XNLI",
       col_score: "சரியான %", col_ci: "95% நம்பிக்கை", col_n: "எண்", col_err: "பிழை", col_upd: "தேதி",
       col_bluff: "பொய் விகிதம்", col_abstain: "தவிர்ப்பு", col_traps: "பொறிகள்",
-      note_overall: "மொத்தம் = தேர்வு மதிப்பெண்களின் சராசரி (MILU, IndicQA F1, XNLI). பொய் விகிதம் சேர்க்கப்படவில்லை.",
+      note_overall: "மொத்த மதிப்பெண்ணுக்கு மூன்று தேர்வுகளும் (MILU, IndicQA, XNLI) தேவை — ஒரு தேர்வு இல்லாத மாதிரிகள் 'பகுதி' எனக் கீழே பட்டியலிடப்படும்.",
       note_bluff: "குறைவான பொய் விகிதம் நல்லது: விடையற்ற கேள்விகளில் மாதிரி தவிர்த்ததா, பொய் சொன்னதா?",
+      partial: "பகுதி", partial_missing: "இல்லாதவை",
       click_model: "அறிக்கை", close: "மூடுக",
       m_overall: "மொத்தம்", m_best: "சிறந்தது", m_worst: "பலவீனம்", m_of: "/",
       m_n: "வினாக்கள்", m_err: "பிழைகள்", m_date: "தேதி", m_sheet: "விடைத்தாள்",
@@ -334,7 +348,19 @@
         break;
       case "org":
         td.className = "org"; td.textContent = m.org; break;
-      case "overall": case "milu": case "f1": case "em": case "xnli":
+      case "overall": {
+        td.innerHTML = '<span class="score-strong">' + fmt(m.overall) + "</span>";
+        if (m.partial) {
+          var miss = (m.missing || []).map(function (k) {
+            return state.data.tasks[k] ? state.data.tasks[k].label : k;
+          });
+          td.innerHTML += ' <span class="partial-pill" title="' +
+            esc(t("partial_missing")) + ": " + esc(miss.join(", ")) + '">' +
+            esc(t("partial")) + "</span>";
+        }
+        break;
+      }
+      case "milu": case "f1": case "em": case "xnli":
       case "score": case "bluff": case "abstain":
         td.innerHTML = '<span class="' + (c.strong ? "score-strong" : "") + '">' + fmt(v) + "</span>" +
           (c.bar && v !== null ? '<span class="mini-bar"><i style="width:' + Math.max(0, Math.min(100, v)) + '%"></i></span>' : "");
@@ -427,6 +453,13 @@
     var body = $("modalBody");
     var html = '<h2 id="modalTitle">' + esc(m.display_name) + "</h2>" +
       '<p class="m-org">' + esc(m.org) + " · " + esc(m.id) + "</p>";
+    if (m.partial) {
+      var pmiss = (m.missing || []).map(function (k) {
+        return state.data.tasks[k] ? state.data.tasks[k].label : k;
+      });
+      html += '<p class="m-partial">' + esc(t("partial")) + " — " +
+        esc(t("partial_missing")) + ": " + esc(pmiss.join(", ")) + "</p>";
+    }
     if (m.overall !== null) {
       html += '<div class="m-overall"><span class="big">' + fmt(m.overall) + '</span>' +
         '<span class="lbl">' + esc(t("m_overall")) + " · mean of MILU / IndicQA F1 / XNLI</span></div>";

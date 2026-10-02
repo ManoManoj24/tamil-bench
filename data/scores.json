@@ -2,7 +2,7 @@
   "meta": {
     "generated_at": "2026-10-02",
     "bench": "tamil-bench",
-    "methodology_note": "Overall = mean of the model's available task scores (MILU accuracy, IndicQA F1, IndicXNLI accuracy), each 0-100, rounded to 1 decimal. Bluff rate is excluded: lower is better there, so it can't average with accuracy-style metrics. Models are ranked per task on that task's primary metric; Overall ranks on the mean."
+    "methodology_note": "Overall = mean of the model's three core task scores (MILU accuracy, IndicQA F1, IndicXNLI accuracy), each 0-100, rounded to 1 decimal. A model missing any core task gets no Overall and is listed as partial below the ranked models. Bluff rate is excluded: lower is better there, so it can't average with accuracy-style metrics. Models are ranked per task on that task's primary metric; the Overall tab ranks complete models first, partial ones below."
   },
   "tasks": {
     "milu": {
@@ -82,6 +82,8 @@
           "n_traps": 27
         }
       },
+      "missing": [],
+      "partial": false,
       "overall": 69.3
     },
     {
@@ -123,6 +125,8 @@
           "n_traps": 27
         }
       },
+      "missing": [],
+      "partial": false,
       "overall": 60.6
     },
     {
@@ -164,6 +168,8 @@
           "n_traps": 27
         }
       },
+      "missing": [],
+      "partial": false,
       "overall": 70.9
     },
     {
@@ -205,6 +211,8 @@
           "n_traps": 27
         }
       },
+      "missing": [],
+      "partial": false,
       "overall": 54.1
     },
     {
@@ -237,7 +245,11 @@
           "n_traps": 27
         }
       },
-      "overall": 50.8
+      "missing": [
+        "indicxnli"
+      ],
+      "partial": true,
+      "overall": null
     },
     {
       "id": "liquid/lfm-2.5-2.6b:free",
@@ -278,6 +290,8 @@
           "n_traps": 27
         }
       },
+      "missing": [],
+      "partial": false,
       "overall": 49.0
     },
     {
@@ -319,6 +333,8 @@
           "n_traps": 27
         }
       },
+      "missing": [],
+      "partial": false,
       "overall": 55.7
     },
     {
@@ -336,7 +352,12 @@
           "sheet": "results/milu_nvidia_nemotron-3-super-120b-a12b:free_n199.jsonl"
         }
       },
-      "overall": 69.5
+      "missing": [
+        "indicqa",
+        "indicxnli"
+      ],
+      "partial": true,
+      "overall": null
     },
     {
       "id": "nvidia/nemotron-3-ultra-550b-a55b:free",
@@ -377,6 +398,8 @@
           "n_traps": 27
         }
       },
+      "missing": [],
+      "partial": false,
       "overall": 58.1
     },
     {
@@ -409,7 +432,11 @@
           "n_traps": 27
         }
       },
-      "overall": 23.6
+      "missing": [
+        "indicxnli"
+      ],
+      "partial": true,
+      "overall": null
     },
     {
       "id": "openai/gpt-5.6-luna",
@@ -450,6 +477,8 @@
           "n_traps": 27
         }
       },
+      "missing": [],
+      "partial": false,
       "overall": 62.7
     },
     {
@@ -491,6 +520,8 @@
           "n_traps": 27
         }
       },
+      "missing": [],
+      "partial": false,
       "overall": 64.4
     },
     {
@@ -532,6 +563,8 @@
           "n_traps": 27
         }
       },
+      "missing": [],
+      "partial": false,
       "overall": 54.8
     },
     {
@@ -564,7 +597,11 @@
           "n_traps": 27
         }
       },
-      "overall": 42.8
+      "missing": [
+        "indicxnli"
+      ],
+      "partial": true,
+      "overall": null
     },
     {
       "id": "qwen/qwen3.8-flash",
@@ -605,6 +642,8 @@
           "n_traps": 27
         }
       },
+      "missing": [],
+      "partial": false,
       "overall": 56.6
     },
     {
@@ -646,6 +685,8 @@
           "n_traps": 27
         }
       },
+      "missing": [],
+      "partial": false,
       "overall": 54.1
     },
     {
@@ -687,6 +728,8 @@
           "n_traps": 27
         }
       },
+      "missing": [],
+      "partial": false,
       "overall": 58.8
     },
     {
@@ -728,6 +771,8 @@
           "n_traps": 27
         }
       },
+      "missing": [],
+      "partial": false,
       "overall": 62.7
     }
   ]

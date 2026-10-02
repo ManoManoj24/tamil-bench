@@ -990,14 +990,18 @@ def emit_scores_json(summary):
             rec["tasks"]["bluff"] = {
                 "bluff_rate": s["bluff_rate"], "abstain_rate": s["abstain_rate"],
                 "n_traps": s["n_traps"]}
-        parts = []
-        if "milu" in rec["tasks"]:
-            parts.append(rec["tasks"]["milu"]["score"])
-        if "indicqa" in rec["tasks"]:
-            parts.append(rec["tasks"]["indicqa"]["f1"])
-        if "indicxnli" in rec["tasks"]:
-            parts.append(rec["tasks"]["indicxnli"]["score"])
-        rec["overall"] = round(sum(parts) / len(parts), 1) if parts else None
+        core = ["milu", "indicqa", "indicxnli"]
+        rec["missing"] = [k for k in core if k not in rec["tasks"]]
+        rec["partial"] = bool(rec["missing"])
+        if rec["partial"]:
+            # No Overall for partial models: averaging over a subset would
+            # unfairly rank them above fully-evaluated models.
+            rec["overall"] = None
+        else:
+            parts = [rec["tasks"]["milu"]["score"],
+                     rec["tasks"]["indicqa"]["f1"],
+                     rec["tasks"]["indicxnli"]["score"]]
+            rec["overall"] = round(sum(parts) / len(parts), 1)
         models.append(rec)
 
     scores = {
@@ -1005,12 +1009,14 @@ def emit_scores_json(summary):
             "generated_at": summary["generated"],
             "bench": "tamil-bench",
             "methodology_note": (
-                "Overall = mean of the model's available task scores "
+                "Overall = mean of the model's three core task scores "
                 "(MILU accuracy, IndicQA F1, IndicXNLI accuracy), each 0-100, "
-                "rounded to 1 decimal. Bluff rate is excluded: lower is better "
-                "there, so it can't average with accuracy-style metrics. "
-                "Models are ranked per task on that task's primary metric; "
-                "Overall ranks on the mean."
+                "rounded to 1 decimal. A model missing any core task gets no "
+                "Overall and is listed as partial below the ranked models. "
+                "Bluff rate is excluded: lower is better there, so it can't "
+                "average with accuracy-style metrics. Models are ranked per "
+                "task on that task's primary metric; the Overall tab ranks "
+                "complete models first, partial ones below."
             ),
         },
         "tasks": tasks_meta,
