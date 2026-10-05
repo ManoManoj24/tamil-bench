@@ -85,4 +85,5 @@ python3 build_site.py --no-push
 
 - Touched scoring/aggregation? Re-run `python3 build_site.py --no-push` and confirm `results/summary.json` plus the printed model counts match expectations, and that `python3 bluff.py` still runs.
 - Touched the site? Re-run `python3 build_site.py --no-push`, confirm `data/scores.json` is valid, and smoke-test the render path (see `app.js` — table, tabs, charts, modal). Every edited UI string needs both `data-i18n` English and `I18N.ta` Tamil variants.
+- `gh_push.py` (in `~/workspace/tamil-bench-push/`) pushes via the GitHub Data API — no git remote needed. If the remote head object isn't in the local clone, it falls back to comparing staged blob SHAs against the remote tree instead of `git diff-tree`.
 - Publishing? Then (and only then) run `python3 build_site.py` without `--no-push`, or commit/push manually.
