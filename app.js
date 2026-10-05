@@ -10,6 +10,12 @@
     query: "",
     lang: localStorage.getItem("tb-lang") || "en",
     data: null,
+    arena: null,
+    battle: 0,
+    pairA: null,
+    pairB: null,
+    revealed: false,
+    revealedKey: null,
   };
 
   /* ---------- i18n ---------- */
@@ -32,6 +38,7 @@
       "method.c1b": "<b>IndicQA</b> — 100 reading-comprehension questions over Tamil Wikipedia passages (AI4Bharat, CC-BY-SA-4.0). Metrics: exact match + F1.",
       "method.c1c": "<b>IndicXNLI</b> — 200 three-way logic questions: entail, contradict, or neutral (repaired mirror of AI4Bharat's IndicXNLI). Metric: accuracy.",
       "method.c1d": "<b>Bluff catch</b> — unanswerable IndicQA traps: does the model abstain or invent an answer? Lower bluff rate wins.",
+      "method.c1e": "<b>Arena</b> — blind battles: two models' real recorded Tamil answers side by side. Vote for the better one; names revealed after. Not a metric, just for fun.",
       "method.c2a": "Zero-shot for MILU/XNLI; 5-shot for MILU only where noted. Temperature 0.",
       "method.c2b": "Fixed random seed (42); MILU sampled stratified by subject.",
       "method.c2c": "API errors and unparseable answers count as wrong — they stay in the denominator.",
@@ -71,8 +78,8 @@
       "method.c3h": "மொத்த மதிப்பெண்",
       "method.c3a": "மொத்த மதிப்பெண் என்பது மூன்று முக்கிய தேர்வு மதிப்பெண்களின் சராசரி — MILU, IndicQA F1, XNLI — ஒவ்வொன்றும் 0–100. ஒரு தேர்வு இல்லாத மாதிரிக்கு மொத்த மதிப்பெண் இல்லை; அது 'பகுதி' எனக் கீழே குறிக்கப்படும்.",
       "method.c3b": "பொய் விகிதம் சேர்க்கப்படவில்லை: அங்கு குறைவானது நல்லது, எனவே சராசரியில் சேராது. அதற்குத் தனி தாவல் உண்டு.",
-      "method.c4h": "நன்றிகள்",
-      "method.c4a": "அசல் தேர்வு: <b>ஸ்ரீகாந்த்</b> (CashlessConsumer, ThamizhKanimai) — <a href=\"https://github.com/LogicIncZo/tamil-bench\">repo</a> · <a href=\"https://x.com/logic\">X</a>.",
+      "method.c1e": "<b>அரங்கம்</b> — குருட்டு மோதல்: இரு மாதிரிகளின் உண்மையான தமிழ் விடைகள் அருகருகே. சிறந்ததற்கு வாக்களியுங்கள்; பெயர்கள் பிறகு தெரியும். இது அளவீடு அல்ல, வேடிக்கைக்காக.",
+      "method.c4h": "நன்றிகள்",      "method.c4a": "அசல் தேர்வு: <b>ஸ்ரீகாந்த்</b> (CashlessConsumer, ThamizhKanimai) — <a href=\"https://github.com/LogicIncZo/tamil-bench\">repo</a> · <a href=\"https://x.com/logic\">X</a>.",
       "method.c4b": "தரவுத் தொகுப்புகள்: AI4Bharat <b>MILU</b>, AI4Bharat <b>IndicQA</b>, AdaMLLab <b>IndicXNLI</b> (AI4Bharat IndicXNLI-இன் சரிசெய்யப்பட்ட நகல்).",
       "method.c4c": "இந்த fork: <b>ManoManoj24</b> — பயன்பாட்டு மேம்பாடுகள் + மதிப்பெண் பலகை மறுவடிவமைப்பு (MIT).",
       "eli5.h2": "Tamil Bench என்றால் என்ன?",
@@ -88,13 +95,25 @@
   /* JS-rendered UI strings */
   var T = {
     en: {
-      tab_overall: "Overall", tab_milu: "MILU", tab_indicqa: "IndicQA", tab_indicxnli: "XNLI", tab_bluff: "Bluff",
+      tab_overall: "Overall", tab_milu: "MILU", tab_indicqa: "IndicQA", tab_indicxnli: "XNLI", tab_bluff: "Bluff", tab_arena: "Arena",
       col_rank: "#", col_model: "Model", col_org: "Org", col_overall: "Overall",
       col_milu: "MILU acc", col_f1: "IndicQA F1", col_em: "IndicQA EM", col_xnli: "XNLI acc",
       col_score: "Accuracy", col_ci: "95% CI", col_n: "n", col_err: "Errors", col_upd: "Updated",
       col_bluff: "Bluff rate", col_abstain: "Abstain", col_traps: "Traps",
       note_overall: "Overall needs all three tasks (MILU, IndicQA, XNLI) — models missing a task are listed below as partial.",
       note_bluff: "Lower bluff rate is better: on unanswerable questions, did the model abstain or invent an answer?",
+      note_arena: "Blind battles from real recorded answers. Two models answered the same Tamil question — names hidden. Vote for the better answer, then reveal.",
+      arena_ai1: "AI 1", arena_ai2: "AI 2",
+      arena_vote: "This one answered better",
+      arena_reveal: "Reveal the models",
+      arena_gold: "Reference answer",
+      arena_votes: "crowd votes",
+      arena_next: "Next battle →", arena_prev: "← Prev",
+      arena_random: "🎲 Random battle",
+      arena_context: "Passage",
+      arena_you_voted: "You voted",
+      arena_tie: "It's a tie so far",
+      arena_leads: "leads",
       partial: "partial", partial_missing: "Missing",
       click_model: "Report card", close: "Close",
       m_overall: "Overall", m_best: "Strongest", m_worst: "Weakest", m_of: "of",
@@ -103,13 +122,25 @@
       copied: "Copied", load_err: "Could not load scores.json — are you serving this over http?"
     },
     ta: {
-      tab_overall: "மொத்தம்", tab_milu: "MILU", tab_indicqa: "IndicQA", tab_indicxnli: "XNLI", tab_bluff: "பொய் பிடிப்பு",
+      tab_overall: "மொத்தம்", tab_milu: "MILU", tab_indicqa: "IndicQA", tab_indicxnli: "XNLI", tab_bluff: "பொய் பிடிப்பு", tab_arena: "அரங்கம்",
       col_rank: "#", col_model: "மாதிரி", col_org: "நிறுவனம்", col_overall: "மொத்தம்",
       col_milu: "MILU", col_f1: "IndicQA F1", col_em: "IndicQA EM", col_xnli: "XNLI",
       col_score: "சரியான %", col_ci: "95% நம்பிக்கை", col_n: "எண்", col_err: "பிழை", col_upd: "தேதி",
       col_bluff: "பொய் விகிதம்", col_abstain: "தவிர்ப்பு", col_traps: "பொறிகள்",
       note_overall: "மொத்த மதிப்பெண்ணுக்கு மூன்று தேர்வுகளும் (MILU, IndicQA, XNLI) தேவை — ஒரு தேர்வு இல்லாத மாதிரிகள் 'பகுதி' எனக் கீழே பட்டியலிடப்படும்.",
       note_bluff: "குறைவான பொய் விகிதம் நல்லது: விடையற்ற கேள்விகளில் மாதிரி தவிர்த்ததா, பொய் சொன்னதா?",
+      note_arena: "உண்மையான பதிவு செய்யப்பட்ட விடைகளின் குருட்டு மோதல். ஒரே தமிழ் கேள்விக்கு இரு மாதிரிகள் விடை — பெயர்கள் மறைக்கப்பட்டுள்ளன. சிறந்த விடைக்கு வாக்களித்து, பிறகு பெயர்களைப் பாருங்கள்.",
+      arena_ai1: "AI 1", arena_ai2: "AI 2",
+      arena_vote: "இதன் விடை சிறந்தது",
+      arena_reveal: "மாதிரிகளைக் காட்டு",
+      arena_gold: "சரியான விடை",
+      arena_votes: "வாக்குகள்",
+      arena_next: "அடுத்த மோதல் →", arena_prev: "← முந்தையது",
+      arena_random: "🎲 சீரற்ற மோதல்",
+      arena_context: "பத்தி",
+      arena_you_voted: "நீங்கள் வாக்களித்துவிட்டீர்கள்",
+      arena_tie: "இதுவரை சமநிலை",
+      arena_leads: "முன்னிலை",
       partial: "பகுதி", partial_missing: "இல்லாதவை",
       click_model: "அறிக்கை", close: "மூடுக",
       m_overall: "மொத்தம்", m_best: "சிறந்தது", m_worst: "பலவீனம்", m_of: "/",
@@ -154,7 +185,7 @@
   }
 
   /* task value extractors for table / sort */
-  var TABS = ["overall", "milu", "indicqa", "indicxnli", "bluff"];
+  var TABS = ["overall", "milu", "indicqa", "indicxnli", "bluff", "arena"];
   function tabValue(m, tab) {
     switch (tab) {
       case "overall": return m.overall;
@@ -276,6 +307,7 @@
     });
     $("taskNote").textContent = state.tab === "overall" ? t("note_overall") :
       state.tab === "bluff" ? t("note_bluff") :
+      state.tab === "arena" ? t("note_arena") :
       (state.data.tasks[state.tab].description || "");
   }
 
@@ -527,6 +559,116 @@
     document.body.style.overflow = "";
   }
 
+  /* ---------- arena: blind battles from real recorded answers ---------- */
+  function arenaName(id) {
+    var m = state.data.models.filter(function (x) { return x.id === id; })[0];
+    return m ? m.display_name : id;
+  }
+  function arenaVotes() {
+    try { return JSON.parse(localStorage.getItem("tb-arena-votes") || "{}"); }
+    catch (e) { return {}; }
+  }
+  function saveArenaVotes(v) {
+    try { localStorage.setItem("tb-arena-votes", JSON.stringify(v)); } catch (e) {}
+  }
+  function renderArena() {
+    var wrap = $("arenaWrap");
+    var battles = (state.arena && state.arena.battles) || [];
+    if (!battles.length) {
+      wrap.innerHTML = '<p class="empty">' + esc(t("load_err")) + "</p>";
+      return;
+    }
+    var n = battles.length;
+    state.battle = ((state.battle || 0) % n + n) % n;
+    var b = battles[state.battle];
+    var ids = Object.keys(b.answers);
+    // keep a valid pair: two models with different answers when possible
+    function validPair(a, c) { return a && c && a !== c && b.answers[a] && b.answers[c]; }
+    if (!validPair(state.pairA, state.pairB)) {
+      state.pairA = ids[0];
+      state.pairB = ids.filter(function (id) { return b.answers[id] !== b.answers[state.pairA]; })[0] || ids[1] || ids[0];
+    }
+    var idA = state.pairA, idB = state.pairB;
+    var vkey = b.qid + "|" + [idA, idB].sort().join("|");
+    if (state.revealedKey !== vkey) state.revealedKey = vkey, state.revealed = false;
+    var votes = arenaVotes();
+    var rec = votes[vkey] || { a: 0, b: 0, mine: null };
+    var revealed = state.revealed || !!rec.mine;
+
+    function opt(selected, exclude) {
+      return ids.map(function (id) {
+        return '<option value="' + esc(id) + '"' +
+          (id === selected ? " selected" : "") + (id === exclude ? " disabled" : "") + ">" +
+          esc(arenaName(id)) + "</option>";
+      }).join("");
+    }
+    function card(side, id, votesFor, total) {
+      var name = revealed ? arenaName(id) : t(side === "a" ? "arena_ai1" : "arena_ai2");
+      var pct = total ? Math.round(votesFor / total * 100) : 0;
+      var h = '<div class="arena-card' + (revealed && rec.mine === id ? " mine" : "") + '">' +
+        '<div class="arena-who">' + esc(name) + "</div>" +
+        '<p class="arena-answer" lang="ta">' + esc(b.answers[id]) + "</p>";
+      if (revealed) {
+        h += '<div class="arena-tally"><div class="arena-bar"><span style="width:' + pct + '%"></span></div>' +
+          '<span class="arena-pct">' + votesFor + " " + esc(t("arena_votes")) + " (" + pct + "%)</span></div>";
+        if (rec.mine === id) h += '<div class="arena-mine">✓ ' + esc(t("arena_you_voted")) + "</div>";
+      } else {
+        h += '<button class="btn arena-vote" data-vote="' + esc(id) + '">' + esc(t("arena_vote")) + "</button>";
+      }
+      return h + "</div>";
+    }
+    var total = rec.a + rec.b;
+    var gold = (b.golds || []).join(" / ");
+    wrap.innerHTML =
+      '<div class="arena-head">' +
+        '<span class="arena-count">' + (state.battle + 1) + " / " + n + "</span>" +
+        '<div class="arena-nav">' +
+          '<button class="btn ghost" data-nav="-1">' + esc(t("arena_prev")) + "</button>" +
+          '<button class="btn ghost" data-nav="1">' + esc(t("arena_next")) + "</button>" +
+          '<button class="btn ghost" data-nav="rand">' + esc(t("arena_random")) + "</button>" +
+        "</div>" +
+      "</div>" +
+      '<div class="arena-pickers">' +
+        '<select id="arenaA" aria-label="Challenger 1">' + opt(idA, idB) + "</select>" +
+        '<span class="arena-vs">⚔️</span>' +
+        '<select id="arenaB" aria-label="Challenger 2">' + opt(idB, idA) + "</select>" +
+      "</div>" +
+      '<div class="arena-q"><p lang="ta">' + esc(b.question) + "</p>" +
+        (b.context ? '<details><summary>' + esc(t("arena_context")) + "</summary><p lang=\"ta\">" + esc(b.context) + "…</p></details>" : "") +
+      "</div>" +
+      '<div class="arena-grid">' + card("a", idA, rec.a, total) + card("b", idB, rec.b, total) + "</div>" +
+      (revealed && gold ?
+        '<p class="arena-gold"><strong>' + esc(t("arena_gold")) + ":</strong> " +
+        '<span lang="ta">' + esc(gold) + "</span></p>" : "") +
+      (!revealed ?
+        '<div class="arena-foot"><button class="btn ghost" data-nav="reveal">' + esc(t("arena_reveal")) + "</button></div>" : "");
+
+    wrap.querySelectorAll("[data-nav]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var k = btn.getAttribute("data-nav");
+        if (k === "rand") state.battle = Math.floor(Math.random() * n);
+        else if (k === "reveal") state.revealed = true;
+        else state.battle += parseInt(k, 10);
+        renderArena();
+      });
+    });
+    wrap.querySelectorAll("[data-vote]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var pick = btn.getAttribute("data-vote");
+        var v = arenaVotes();
+        var r = v[vkey] || { a: 0, b: 0, mine: null };
+        if (r.mine) return;
+        r.mine = pick;
+        if (pick === idA) r.a++; else r.b++;
+        v[vkey] = r; saveArenaVotes(v);
+        state.revealed = true;
+        renderArena();
+      });
+    });
+    $("arenaA").addEventListener("change", function (e) { state.pairA = e.target.value; state.revealed = false; renderArena(); });
+    $("arenaB").addEventListener("change", function (e) { state.pairB = e.target.value; state.revealed = false; renderArena(); });
+  }
+
   /* ---------- stats ---------- */
   function renderStats() {
     var d = state.data;
@@ -538,6 +680,11 @@
 
   function render() {
     renderTabs();
+    var isArena = state.tab === "arena";
+    $("tableWrap").hidden = isArena;
+    $("charts").hidden = isArena;
+    $("arenaWrap").hidden = !isArena;
+    if (isArena) { renderArena(); return; }
     renderTable();
     renderCharts();
   }
@@ -594,7 +741,12 @@
     state.sortDir = tabDir(state.tab);
     fetch("data/scores.json")
       .then(function (r) { if (!r.ok) throw new Error("http " + r.status); return r.json(); })
-      .then(function (d) { state.data = d; renderStats(); render(); })
+      .then(function (d) {
+        state.data = d;
+        return fetch("data/arena.json").then(function (r) { return r.ok ? r.json() : null; })
+          .catch(function () { return null; });
+      })
+      .then(function (a) { state.arena = a; renderStats(); render(); })
       .catch(function () {
         $("boardBody").innerHTML = '<tr><td colspan="9" class="empty">' + esc(t("load_err")) + "</td></tr>";
       });

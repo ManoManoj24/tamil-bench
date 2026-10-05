@@ -1,0 +1,494 @@
+{
+  "generated_at": "2026-10-05",
+  "n_battles": 19,
+  "note": "Real recorded predictions from results/indicqa_*_n100.jsonl. Names hidden until you vote.",
+  "battles": [
+    {
+      "qid": 1563,
+      "question": "பிரதாபனை கலிங்க பகவான் என்னவென்று  அழைத்தார்?",
+      "context": "மனக்கசப்பு மனிதனை இந்த சந்தைக்குத் தள்ளியது, அவர்கள் சுயகெளரவம் பாதிக்கப்படுவதை கண்கூடாகக் கண்டனர்: அப்படிப்பட்ட பழியில் இருந்து ஹம்மிர் (மகா ராணா ஹம்மிர்) வழித்தோன்றல் மட்டுமே பாதுகாக்கப்பட்டார். உலகம் கேட்கலாம், பிரதாப்பிற்கு எங்கிருந்து மறைமுக உதவி வெளி வந்தது? எங்கிருந்தும் அல்ல ஆனால் அவரது ஆண்மை மற்றும் வாளில் இருந்தே வந்தது. . மனிதச் சந்தையின் தரகரான (அக்பர்) நிச்சயம் ஒருநாள் இந்த உலகை விட்ட",
+      "golds": [
+        "துருக்கியச் சக்ரவர்த்தி"
+      ],
+      "answers": {
+        "anthropic/claude-sonnet-5.5": "துருக்கியச் சக்ரவர்த்தி",
+        "google/gemma-4-26b-a4b-it:free": "எனது கடவுள் ஏகலிங்கா",
+        "liquid/lfm-2.5-2.6b:free": "துருக்கியச் சக்ரவர்த்தி",
+        "nex-agi/nex-n2.5-mini": "துர்க்கியச் சகர்வர்த்தி",
+        "nvidia/nemotron-3.5-lightning:free": "Here's a thinking process:\n\n1.  **Analyze the Request:**\n   - User wants me to read a passage and answer a question.\n   - Reply ONLY with a short phrase from the passage, in Tamil.\n   - No explanation.\n   - The question is: \"பிரதாபனை கலிங்க பகவான் என்னவென்று அழைத்தார்?\" (What did they call Prathapa as Kalinkabhagavan?)\n\n2.  **Analyze the Passage:**\n   - The passage is in Tamil (mixed with some transliterated names/English).\n   - Let me extract the relevant part about Prathapa being called \"Kalinkabhagavan\".\n   - Scanning through: \"எனது கடவுள் ஏகலிங்கா, பிரதாப் அழைப்பது துருக்கியச் சக்ரவர்த்தி என்று மட்டும் தான்...\"\n   - Later: \"நீங்கள் இந்த வார்த்தை யுத்தத்தில் மேம்பட்டு இருக்கலாம்.\"\n   - Looking for \"கலிங்க பகவான்\" or similar.\n   - Found: \"எனது கடவுள் ஏகலிங்கா\" - This seems to be referring to the deity as \"Ekalinga\" or \"Kalinkaa\".\n   - Wait, the question is: \"பிரதாபனை கலிங்க பகவான் என்னவென்று அழைத்தார்?\" (What did they call Prathapa as Kalinkabhagavan?)\n   - In the passage: \"எனது கடவுள் ஏகலிங்கா, பிரதாப் அழைப்பது துருக்கியச் சக்ரவர்த்தி என்று மட்டும் தான்...\"\n   - Actually, let me read carefully: The passage says: \"எனது கடவுள் ஏகலிங்கா\" - this seems to be Prathapa addressing God as \"Ekalinga\".\n   - But the question asks what Prathapa was called as \"Kalinkabhagavan\".\n   - Looking further: \"நீங்கள் இந்த வார்த்தை யுத்தத்தில் மேம்பட்டு இருக்கலாம்.\" - Not directly.\n   - Let me search for \"கலிங்க\" in the text.\n   - I see: \"எனது கடவுள் ஏகலிங்கா\" - this is likely the phrase. \"ஏகலிங்கா\" might be the form, but the question",
+        "openai/gpt-5.6-luna": "துருக்கியச் சக்ரவர்த்தி",
+        "openai/gpt-6-luna": "துருக்கியச் சக்ரவர்த்தி",
+        "openai/gpt-oss-20b": "எனது கடவுள் ஏகலிங்கா",
+        "stealth/space-bunny-alpha": "துருக்கியச் சக்ரவர்த்தி",
+        "z-ai/glm-5.3-flash": "The question asks: \"பிரதாபனை கலிங்க பகவான் என்னவென்று அழைத்தார்?\" - Who called Pratap as Kalinga Bhagavan? Wait, let me re-read.\n\nActually the question seems to be: \"பிரதாபனை கலிங்க பகவான் என்னவென்று அழைத்தார்?\" Hmm, but the passage says \"எனது கடவுள் ஏகலிங்கா\" - \"My god is Ekalinga\". So the question might be asking: What did Pratap call his god? Or who did Pratap call as...?\n\nWait, the question: \"பிரதாபனை கலிங்க பகவான் என்னவென்று அழைத்தார்?\" - Perhaps it's asking \"What did Pratap call his god (கடவுள்)?\" The passage says \"எனது கடவுள் ஏகலிங்கா\" - \"My god Ekalinga\".\n\nSo the answer would be \"ஏகலிங்கா\" (Ekalinga).\n\nThe question in Tamil: \"பிரதாபனை கலிங்க பகவான் என்னவென்று அழைத்தார்?\" Hmm, maybe it's a translation issue. Perhaps the original question was \"Whom did Pratap call his god?\" Answer: Ekalinga.\n\nSo answer: ஏகலிங்க�"
+      }
+    },
+    {
+      "qid": 336,
+      "question": "அவர் தனது ஆரம்பக் கல்வியை எந்த இடத்தில் உள்ள பள்ளியில் முடித்தார்?",
+      "context": "அம்பேத்கர் பிரித்தானிய இந்தியாவில் மாவ் எனுமிடத்தில் (இப்போது மத்தியப் பிரதேசம் அம்பாவாதே என்னும் கிராமத்தில்  1891 ஏப்ரல் 14 அன்று ராம்ஜி மாலோஜி சக்பால் - பீமாபாய் ஆகியோரின் 14-வது குழந்தையாகப் பிறந்தார். அம்பேத்கரின் குடும்பப் பின்னணி தற்போதைய மகாராட்டிர மாநிலம் ரத்னகிரி மாவட்டத்தில் அம்பேவாதே வட்டத்தைச் சேர்ந்த மராத்தியர் குடும்பத்தைச் சேர்ந்ததாகும். இராம்ஜி சக்பால் இராணுவப்பள்ளி ஒன்றின் தலைமை ",
+      "golds": [
+        "சாத்தாராவில் "
+      ],
+      "answers": {
+        "anthropic/claude-sonnet-5.5": "சாத்தாராவில்",
+        "deepseek/deepseek-v4.1-flash": "சாத்தாராவில் உள்ள ஒரு பள்ளியில்",
+        "google/gemini-3.8-flash": "சாத்தாராவில்",
+        "google/gemma-4-26b-a4b-it:free": "சாத்தாராவில் உள்ள ஒரு பள்ளியில்",
+        "inclusionai/ling-3.0-flash-vl:free": "சாத்தாராவில்",
+        "liquid/lfm-2.5-2.6b:free": "சாத்தாராவில் உள்ள பள்ளியில்",
+        "nex-agi/nex-n2.5-mini": "சாத்தாராவில் உள்ள பள்ளியில்",
+        "nvidia/nemotron-3-ultra-550b-a55b:free": "சாத்தாராவில் உள்ள ஒரு பள்ளியில்",
+        "nvidia/nemotron-3.5-lightning:free": "Here's a thinking process:\n\n1.  **Analyze the Request:**\n   - User wants me to read a passage and answer a question.\n   - Reply ONLY with a short phrase from the passage, in Tamil.\n   - No explanation.\n   - The question is: \"அவர் தனது ஆரம்பக் கல்வியை எந்த இடத்தில் உள்ள பள்ளியில் முடித்தார்?\" (Where did he complete his primary education?)\n\n2.  **Find the Relevant Information in the Passage:**\n   - Passage text: \"1900 ஆண்டில் சாத்தாராவில் உள்ள ஒரு பள்ளியில் தனது தொடக்கக் கல்வியைத் முடித்த அம்பேத்கர் உயர்நிலைப்பள்ளியில் சேர்ந்து பயின்றார்.\"\n   - Translation: \"In 1900, Ambedkar completed his primary education in a school in Satara and joined a higher secondary school.\"\n   - So the answer is \"சாத்தாராவில் உள்ள ஒரு பள்ளி\" or just \"சாத்தாரா\".\n\n3.  **Format the Output:**\n   - Must be a short phrase from the passage, in Tamil.\n   - No explanation.\n   - Just the phrase.\n\n   The phrase from the passage: \"சாத்தாராவில் உள்ள ஒரு பள்ளி\" or \"சாத்தாரா\". I'll use \"சாத்தாராவில் உள்ள பள்ளி\" or simply \"சாத்தாரா\". The passage says \"சாத்தாராவில் உள்ள ஒரு பள்ளி\". I'll output that exact phrase or a concise version. Since it says \"short phrase\", I'll give \"சாத்தாராவில் உள்ள பள்ளி\".\n\n   Let me double-check the exact wording in the passage: \"1900 ஆண்டில் சாத்தாராவில் உள்ள ஒரு பள்ளியில் தனது தொடக்கக் கல்வியைத் முடித்த அம்பேத்கர்...\"\n   So the location is \"சாத்தாராவில் உள்ள ஒரு பள்ளி\".\n\n   I'll output: \"சாத்தாராவில் உள்ள ஒரு பள்ளி\"\n\n   But the instruction says \"Reply ONLY with a short phrase from the passage, in Tamil.\" So I should just give the phrase, no quotes, no extra text.\n\n   Final answer: \"சாத்தாராவில் உள்ள ஒரு பள்ளி\" (or just \"சாத்தாரா\" but I'll stick to the exact phrase from the text). Actually, \"சாத்தாராவில் உள்ள பள்ளி\" is fine.",
+        "openai/gpt-5.6-luna": "சாத்தாராவில் உள்ள ஒரு பள்ளியில்",
+        "openai/gpt-6-luna": "சாத்தாராவில் உள்ள ஒரு பள்ளியில்",
+        "openai/gpt-oss-20b": "சாத்தாராவில் உள்ள ஒரு பள்ளியில்",
+        "poolside/laguna-s-2.1:free": "சாத்தாராவில் உள்ள ஒரு பள்ளியில்",
+        "qwen/qwen3.8-flash": "சாத்தாராவில்",
+        "stealth/space-bunny-alpha": "சாத்தாராவில் உள்ள ஒரு பள்ளியில்",
+        "xiaomi/mimo-v2.5": "சாத்தாராவில்",
+        "z-ai/glm-5.3-flash": "சாத்தாரா"
+      }
+    },
+    {
+      "qid": 320,
+      "question": "ஜனாதிபதி தேர்தலில் எத்தனை வாக்குகள் பெற்று அப்துல் கலாம் அவர்கள்  வெற்றி பெற்றார்?",
+      "context": "அப்துல் கலாம் இந்தியாவின் பதினொன்றாவது குடியரசுத் தலைவராக, கே ஆர் நாராயணனுக்குப் பிறகு பணியாற்றினார். அவர் 2002இல் நடந்த குடியரசுத்தலைவர் தேர்தலில் 1,07,366 வாக்குகளைப் பெற்ற இலட்சுமி சாகலை, 9,22,884 வாக்குகள் பெற்று வெற்றி பெற்றார். இவர் 25 சூலை 2002 முதல் 25 சூலை 2007 வரை பணியாற்றினார். 10 சூன் 2002 ல் அப்பொழுது அதிகாரத்தில் இருந்த தேசிய ஜனநாயகக் கூட்டணி (NDA), எதிர்க்கட்சியான இந்திய தேசிய காங்க",
+      "golds": [
+        "9,22,884 வாக்குகள் "
+      ],
+      "answers": {
+        "anthropic/claude-sonnet-5.5": "9,22,884 வாக்குகள்",
+        "deepseek/deepseek-v4.1-flash": "9,22,884 வாக்குகள்",
+        "google/gemini-3.8-flash": "9,22,884 வாக்குகள்",
+        "google/gemma-4-26b-a4b-it:free": "9,22,884 வாக்குகள்",
+        "inclusionai/ling-3.0-flash-vl:free": "9,22,884 வாக்குகள்",
+        "liquid/lfm-2.5-2.6b:free": "1,07,366 வாக்குகள்",
+        "nex-agi/nex-n2.5-mini": "9,22,884 வாக்குகள்",
+        "nvidia/nemotron-3-ultra-550b-a55b:free": "9,22,884 வாக்குகள் பெற்று",
+        "nvidia/nemotron-3.5-lightning:free": "Here's a thinking process:\n\n1.  **Analyze User Request:**\n   - Read the passage\n   - Answer the question\n   - Reply ONLY with a short phrase from the passage, in Tamil\n   - No explanation\n\n2.  **Analyze the Passage & Question:**\n   - Passage is about Dr. A.P.J. Abdul Kalam becoming President of India.\n   - Question: \"ஜனாதிபதி தேர்தலில் எத்தனை வாக்குகள் பெற்று அப்துல் கலàm அவர்கள் வெற்றி பெற்றார்?\" (How many votes did Dr. Abdul Kalam get in the President election and won?)\n   - I need to find the specific number of votes from the passage.\n\n   Let me scan the passage for vote counts related to Abdul Kalam:\n   - \"அப்துல் கலàm இந்தியாவின் பதினொன்றாவது குடியரசுத் தலைவராக, கே ஆர் நாராயணனுக்குப் பிறகு பணியாற்றினார். அவர் 2002இல் நடந்த குடியரசுத்தலைவர் தேர்தலில் 1,07,366 வாக்குகள-12 md:prose-lg max-w-2xl mx-auto prose prose-invert\">\n              <h1>Dr. A.P.J. Abdul Kalam</h1>\n              <p>Second string: 9,22,884 வாக்குகள் பெற்று வெற்றி பெற்றார்.\"\n   Wait, let me read carefully:\n   \"அவர் 2002இல் நடந்த குடியரசுத்தலைவர் தேர்தலில் 1,07,366 வாக்குகளைப் பெற்ற இலட்சுமி சாகலை, 9,22,884 வாக்குகள் பெற்று வெற்றி பெற்றார்.\"\n   Actually, the phrasing is a bit messy in the passage, but it says: \"அவர் 2002இல் நடந்த குடியரசுத்தலைவர் தேர்தலில் 1,07,366 வாக்குகளைப் பெற்ற இலட்சுமி சாகலை, 9,22,884 வாக்குகள் பெற்று வெற்றி பெற்றார்.\"\n   Wait, let me re-read that exact line:\n   \"அவர் 2002இல் நடந்த குடியரசுத்தலைவர் தேர்தலில் 1,07,366 வாக்குகளைப் பெற்ற இலட்ச",
+        "openai/gpt-5.6-luna": "9,22,884 வாக்குகள்",
+        "openai/gpt-6-luna": "9,22,884 வாக்குகள் பெற்று வெற்றி பெற்றார்",
+        "openai/gpt-oss-20b": "9,22,884 வாக்குகள்",
+        "poolside/laguna-s-2.1:free": "9,22,884 வாக்குகள்",
+        "qwen/qwen3.8-flash": "9,22,884 வாக்குகள்",
+        "stealth/space-bunny-alpha": "9,22,884 வாக்குகள்",
+        "xiaomi/mimo-v2.5": "9,22,884 வாக்குகள்",
+        "z-ai/glm-5.3-flash": "9,22,884 வாக்குகள்"
+      }
+    },
+    {
+      "qid": 539,
+      "question": "முகலாயர்கள் எந்த மொழியைப் பேசினார்கள்?",
+      "context": "இது \"இந்தியாவில் உள்ள முஸ்லிம் கலையின் ஆபரணமாகவும், உலக பாரம்பரியத்தின் எல்லோராலும் போற்றப்படுகின்ற தலைசிறந்த படைப்புகளில் ஒன்றாகவும் உள்ளது\". இதை காண்பதற்கு மட்டுமே ஒரு வருடத்திற்கு 70 முதல் 80 லட்சம் பேர் வருகின்றனர். அரண்மனைகள், கல்லறைகள், தோட்டங்கள் மற்றும் கோட்டைகள் என இந்த அரச மரபினால் கட்டப்பட்ட கட்டடங்கள் இன்று ஆக்ரா, அவுரங்காபாத், தில்லி, டாக்கா, பத்தேப்பூர் சிக்ரி, ஜெய்ப்பூர், லாகூர், கா",
+      "golds": [
+        "உருது"
+      ],
+      "answers": {
+        "anthropic/claude-sonnet-5.5": "உருது",
+        "deepseek/deepseek-v4.1-flash": "உருது",
+        "google/gemini-3.8-flash": "உருது",
+        "google/gemma-4-26b-a4b-it:free": "உருது",
+        "inclusionai/ling-3.0-flash-vl:free": "உருது",
+        "liquid/lfm-2.5-2.6b:free": "உருது",
+        "nex-agi/nex-n2.5-mini": "உருது மொழி",
+        "nvidia/nemotron-3-ultra-550b-a55b:free": "உருது",
+        "openai/gpt-5.6-luna": "பாரசீக தாக்கம் அதிகமுடைய இந்துஸ்தானி மொழியாகிய உருது",
+        "openai/gpt-6-luna": "பாரசீக தாக்கம் அதிகமுடைய இந்துஸ்தானி மொழியாகிய உருது",
+        "openai/gpt-oss-20b": "உருது",
+        "poolside/laguna-s-2.1:free": "Okay, let's see. The user is asking which language the Mughals spoke. The passage is in Tamil, so I need to find the answer there.\n\nLooking through the passage, there's a part that says \"பாரசீகமே ஆதிக்கமான மற்றும் பேரரசின் 'அலுவல்' மொழியாக இருந்த போதிலும் ஆளும் வர்க்கத்தினரின் மொழியாக இருந்தது பாரசீக தாக்கம் அதிகமுடைய இந்துஸ்தானி மொழியாகிய உருது ஆகும்.\" So it mentions that Persian was the official language, but the ruling class's language became Urdu. Then it says Urdu was written in the Persian-Arabic script. \n\nThe question is about the language the Mughals spoke. The passage says that the Mughals used Persian as the official language, but the ruling class's language was Urdu. However, the Mughals themselves might have used Persian more. Wait, the passage says \"பாரசீகமே ஆதிக்கமான மற்றும் பேரரசின் 'அலுவல்' மொழியாக இருந்த போதிலும் ஆளும் வர்க்கத்தினரின் மொழியாக இருந்தது பாரசீக தாக்கம் அதிகமுடைய இந்துஸ்தானி மொழியாகிய உருது ஆகும்.\" So the official language was Persian, but the ruling class's language became Urdu. But the Mughals",
+        "qwen/qwen3.8-flash": "உருது",
+        "stealth/space-bunny-alpha": "உருது",
+        "xiaomi/mimo-v2.5": "உருது",
+        "z-ai/glm-5.3-flash": "உருது மொழி"
+      }
+    },
+    {
+      "qid": 495,
+      "question": "குப்த பேரரசின் சிறிய ராஜாவின் பெயர் என்ன?",
+      "context": "ஆர்யபட்டா பிறந்த வருடத்தைப் பற்றி தெளிவாக ஆர்யபட்டியாவில் கூறி இருந்தாலும், அவர் எந்த இடத்தில் பிறந்தார் என்பது அறிஞர்களுக்கு இடையே ஒரு புரியாத புதிராக இன்றும் இருந்து வருகிறது. சிலர் இவர் நர்மதா மற்றும் கோதாவரி நதிகளுக்கிடையே இருந்த அஷமாக என்ற ஆந்திரப் பிரதேசத்தில் உள்ள தெலுங்கானா வட்டாரத்தில் பிறந்ததாகவும், ஆனால் முந்திய புத்தமத உரைகள் அஷ்மாகவை இன்னும் தெற்கு வசமாக தக்ஷிணபதத்தில் அதாவது தக்காணப்",
+      "golds": [
+        "ராஜா பரதா"
+      ],
+      "answers": {
+        "anthropic/claude-sonnet-5.5": "பத்தியில் இதற்கான பதில் இல்லை.",
+        "google/gemini-3.8-flash": "ராஜா பரதா",
+        "google/gemma-4-26b-a4b-it:free": "கொடுக்கப்பட்ட பகுதியில் குப்த பேரரசின் சிறிய ராஜாவைப் பற்றிய தகவல் இல்லை.",
+        "liquid/lfm-2.5-2.6b:free": "பாரத ராஜா",
+        "nex-agi/nex-n2.5-mini": "பாரத ராஜா",
+        "openai/gpt-5.6-luna": "ராஜா பரதா",
+        "openai/gpt-6-luna": "ராஜா பரதா",
+        "openai/gpt-oss-20b": "ஆர்யபட்டா",
+        "stealth/space-bunny-alpha": "ராஜா பரதா",
+        "xiaomi/mimo-v2.5": "பாஸ்கர I"
+      }
+    },
+    {
+      "qid": 1019,
+      "question": "வெற்றியின் வாயில் எப்படி அழைக்கப்பட்டது?",
+      "context": "கோல்கொண்டா கோட்டை இந்திய தொல்லியல் துறை பட்டியலில் இடம் பெற்றுள்ளது. கோல்கொண்டாவில் 87 அரை வட்ட கொத்தளங்களுடனான 10 கிமீ நீள வெளிச் சுவர் கொண்ட நான்கு தனித்தனி கோட்டைகள் உள்ளன. கொத்தளங்கள் சிலவற்றில் இன்னும் பீரங்கிகள் பொருத்தப்பட்டிருக்கின்றன. கோட்டையில் எட்டு நுழைவாயில்கள், மற்றும் ஏராளமான அரண்மனை குடியிருப்புகள், அரங்குகள், கோவில்கள், மசூதிகள் ஆகியவை உள்ளே இருக்கின்றன. இவற்றில் மிகக் குறைந்த உயர",
+      "golds": [
+        "பதே தர்வாசா"
+      ],
+      "answers": {
+        "anthropic/claude-sonnet-5.5": "பதே தர்வாசா",
+        "deepseek/deepseek-v4.1-flash": "பதே தர்வாசா",
+        "google/gemini-3.8-flash": "பதே தர்வாசா",
+        "google/gemma-4-26b-a4b-it:free": "பதே தர்வாசா",
+        "inclusionai/ling-3.0-flash-vl:free": "அவுரங்கசீப் ராணுவத்தின் வெற்றிப் படை இந்த வாயில் வழியாக நுழைந்ததால் கிட்டியது.",
+        "liquid/lfm-2.5-2.6b:free": "பதே தர்வாசா",
+        "nex-agi/nex-n2.5-mini": "பதே தர்வாசா",
+        "nvidia/nemotron-3-ultra-550b-a55b:free": "பதே தர்வாசா",
+        "nvidia/nemotron-3.5-lightning:free": "Here's a thinking process:\n\n1.  **Analyze the User's Request:**\n   - Read the passage (provided in Tamil).\n   - Answer the question based on the passage.\n   - Reply ONLY with a short phrase from the passage, in Tamil.\n   - No explanation.\n\n2.  **Identify the Question:**\n   - The question is: \"வெற்றியின் வாயில் எப்படி அழைக்கப்பட்டது?\" (How was the Victory Gate named?)\n   - I need to find the relevant part in the passage that explains why the \"victory entrance\" (வெற்றி நுழைவாயில்) was named so.\n\n3.  **Scan the Passage for the Answer:**\n   - Let me look for mentions of \"வெற்றி\", \"நுழைவாயில்\", \"வெற்றிப் படை\", \"அவுரங்கசீப்\".\n   - Found this part: \"கோட்டையை வென்ற அவுரங்கசீப் ராணுவத்தின் வெற்றிப் படை இந்த வாயில் வழியாக நுழைந்ததால் இந்த பெயர் கிட்டியது.\"\n   - Translation: \"Because the victorious troop of the Afghan army entered through this gate, this name was given.\"\n   - Also: \"வெற்றியின் வாயில்\" is referred to as \"வெற்றி நுழைவாயில்\" in the passage.\n\n4.  **Extract the Exact Phrase:**\n   - The passage says: \"கோட்டையை வென்ற அவுரங்கசீப் ராணுவத்தின் வெற்றிப் படை இந்த வாயில் வழியாக நுழைந்ததால் இந்த பெயர் கிட்டியது.\"\n   - But the question asks: \"வெற்றியின் வாயில் எப்படி அழைக்கப்பட்டது?\" (How was the Victory Gate named?)\n   - The direct reason given: \"அவுரங்கசீப் ராணுவம் வெற்றி பெற்று இந்த வாயில் நுழைந்ததால்\" or simply the phrase explaining the naming.\n   - Let me find the most concise, exact phrase from the passage that answers \"how it was named\".\n   - Key part: \"அவுரங்கசீப் ராணுவத்தின் வெற்றிப் படை இந்த வாயில் வழியாக நுழைந்ததால் இந்த பெயர் கிட்டியது.\"\n   - Or maybe just: \"அவுரங்கசீப் ராணுவம் வெற்றி பெற்று இந்த வாயில் நுழைந்ததால்\" but I need",
+        "openai/gpt-5.6-luna": "பதே தர்வாசா",
+        "openai/gpt-6-luna": "பதே தர்வாசா",
+        "openai/gpt-oss-20b": "பதே தர்வாசா",
+        "qwen/qwen3.8-flash": "பதே தர்வாசா",
+        "stealth/space-bunny-alpha": "பதே தர்வாசா",
+        "xiaomi/mimo-v2.5": "\"பதே தர்வாசா\"",
+        "z-ai/glm-5.3-flash": "பதே தர்வாசா"
+      }
+    },
+    {
+      "qid": 1331,
+      "question": "பஹ்லாவாஸ் முன்பு எப்படி அழைக்கப்பட்டார்?",
+      "context": "பல்லவர் முதல் அரசன் பெரும்பாணாற்றுப்படையில் புகழ்பெற்ற தொண்டைமான் இளந்திரையன் ஆவான்' என விளக்கியுள்ளார். யாழ்ப்பாணம் யாழ்ப்பாண மக்களால் 'மணிபுரம்' எனப்படுகிறது. அங்கு நாகரும் இருந்தமையால் 'மணி நாகபுரம்' என்னும் பெயர் பெற்றது. இந்தியாவிலிருந்து இலங்கை நோக்கி வருபவர்க்கு யாழ்ப்பாணம் ஒரு போது (போத்து - sprout)போலக்காணப்படுதலின், அது போது (போத்து) எனப்பட்டது. போது, போத்து, பல்லவம் என்பன ஒரே பொருளைக் க",
+      "golds": [
+        "பார்த்தியர்கள்"
+      ],
+      "answers": {
+        "anthropic/claude-sonnet-5.5": "பார்த்தியர்கள்",
+        "deepseek/deepseek-v4.1-flash": "பார்த்தியர்கள்",
+        "google/gemini-3.8-flash": "பார்த்தியர்கள்",
+        "google/gemma-4-26b-a4b-it:free": "பார்த்தியர்கள்",
+        "inclusionai/ling-3.0-flash-vl:free": "பார்த்தியர்கள்",
+        "liquid/lfm-2.5-2.6b:free": "பார்த்தியர்கள்",
+        "nex-agi/nex-n2.5-mini": "பார்த்தியர்கள்",
+        "nvidia/nemotron-3-ultra-550b-a55b:free": "பார்த்தியர்கள்",
+        "nvidia/nemotron-3.5-lightning:free": "Here's a thinking process:\n\n1.  **Analyze the Request:**\n   - User wants me to read a passage in Tamil.\n   - Answer a specific question based on the passage.\n   - Reply ONLY with a short phrase from the passage, in Tamil.\n   - No explanation.\n\n2.  **Identify the Question:**\n   - The question at the end is: \"பஹ்லாவாஸ் முன்பு எப்படி அழைக்கப்பட்டார்?\"\n   - This translates to: \"How were the Pallavas called before?\"\n\n3.  **Scan the Passage for the Answer:**\n   - I need to find where the passage mentions how Pallavas were called before or prior to something.\n   - Let me read through the passage carefully.\n\n   Passage excerpt (mental translation/processing):\n   - \"பल्लவர் முதல் அரசன் பெரும்பாண-arrival...\" \n   - \"யாழ்ப்பாணம் யாழ்ப்பாண மக்களால் 'மணிபுரம்'...\"\n   - \"அங்கு நாகarum இருந்தமையால் 'மணி நாகபுரம்'...\"\n   - \"இலங்கை நோக்கி வருபவர்க்கு யாழ்ப்பாணம் ஒரு போது (போத்து - sprout) போலக்காணப்படுதலின்...\"\n   - \"போது, போத்து, பல்லவம் என்பன ஒரே பொருளைக் குறிப்பன.\"\n   - \"யாழ்ப்பாணத்திலிருந்து போந்தவர் ஆதலின், தம்மைப் 'போத்தர்' என்றும், 'பல்லவர்' என்றும் பallas அரசர் கூறிக்கொண்டனர்.\"\n   - \"'மணிபல்லவம்' என்னும் தீவு...\"\n   - \"வின்செண்ட் ஸ்மித் தமது மூன்றாம் பதிப்பில்...\"\n   - \"பிராகிருத மொழியில் வெளியிடப்பட்ட பallas பட்டயங்களோ...\"\n   - \"பallas காலத்தில் வடமொழி தொண்டை மண்டலத்தில் பேரரசு செலுத்தியது எனலாம்.\"\n   - \"பாரவி, தண்டி முதலிய வடமொழிப் புலவர்கள் பallas ஆட்சியில் செல்வாக்குப் பெற்றிருந்தனர்...\"\n   - \"மேலும், பallas, தம்மைப் 'பாரத்வாச கோத்திரத்தார்' என்று பட்டயங்களிலும் கல்வெட்டுகளிலும் கூறிக்கொள்கின்றனர்;\"",
+        "openai/gpt-5.6-luna": "பார்த்தியர்கள்",
+        "openai/gpt-6-luna": "பார்த்தியர்கள் என்று அழைக்கப்பட்டார்கள்",
+        "openai/gpt-oss-20b": "பார்த்தியர்கள்",
+        "poolside/laguna-s-2.1:free": "பார்த்தியர்கள்",
+        "qwen/qwen3.8-flash": "பார்த்தியர்கள்",
+        "stealth/space-bunny-alpha": "பார்த்தியர்கள்",
+        "xiaomi/mimo-v2.5": "பார்த்தியர்கள்",
+        "z-ai/glm-5.3-flash": "பார்த்தியர்கள்"
+      }
+    },
+    {
+      "qid": 704,
+      "question": "மாண்ட்லோயிஸ் என்று அழைக்கப்பட்டவர்கள் யார்?",
+      "context": "இந்தோரின் நிறுவனர்களின் மூதாதையர்கள் அப்பகுதியின் நிலக்கிழார்கள் ஆவர். அப்பகுதி நர்மதா நதியின் கரைகளிலிருந்து ராஜ்புதானாவின் எல்லைகள் வரை பரந்திருந்தது. முகலாயர்கள் காலத்தில், இக்குடும்பங்களின் நிறுவனர்கள் சௌதாரி எனும் பட்டப்பெயரைப் பெற்றனர், இது அந்நிலத்தின் மீதான அவர்களின் உரிமையை நிலைநிறுத்தியது. 18 ஆம் நூற்றாண்டில், மால்வாவின் கட்டுப்பாடு பேஷ்வாக்கள் வம்சத்தின் வசம் போனது, சௌதாரிகள் \"மண்ட்லோய்",
+      "golds": [
+        "சௌதாரிகள்"
+      ],
+      "answers": {
+        "anthropic/claude-sonnet-5.5": "சௌதாரிகள்",
+        "deepseek/deepseek-v4.1-flash": "சௌதாரிகள்",
+        "google/gemini-3.8-flash": "சௌதாரிகள்",
+        "google/gemma-4-26b-a4b-it:free": "சௌதாரிகள்",
+        "inclusionai/ling-3.0-flash-vl:free": "சௌதாரிகள்",
+        "liquid/lfm-2.5-2.6b:free": "சௌதாரிகள்",
+        "nex-agi/nex-n2.5-mini": "சௌதாரிகள்",
+        "nvidia/nemotron-3-ultra-550b-a55b:free": "சௌதாரிகள்",
+        "nvidia/nemotron-3.5-lightning:free": "Here's a thinking process:\n\n1.  **Analyze the Request:**\n   - User wants me to read a passage and answer a question.\n   - Reply ONLY with a short phrase from the passage, in Tamil.\n   - No explanation.\n\n2.  **Analyze the Passage:**\n   The passage is in Tamil (mostly, with some transliterated names). Let me parse it to understand the context and find the answer to the implied question.\n\n   The question isn't explicitly stated as a separate line, but looking at the structure, the user probably wants me to answer based on the passage. Wait, the user says: \"Read the following passage and answer the question.\" But there's no explicit question mark or separate question text. Let me re-read carefully.\n\n   Actually, the user provided a passage and then said \"Question: மாண்ட்லோயிஸ் என்று அழைக்கப்பட்டவர்கள் யார்?\" So the question is: \"Who are called Mandloys?\" or \"Who are called Mandloys?\"\n\n   Let me find the relevant part in the passage about \"மண்ட்லோய்ஸ்\" or \"மண்டல்ஸ்\".\n\n   Scanning the passage:\n   \"முகலாயர்கள் காலத்தில், இக்குடும்பங்களின் நிறுவனர்கள் சௌதாரி எனும் பட்டப்பெயரைப் பெற்றனர், இது அந்நிலத்தின் மீதான அவர்களின் உரிமையை நிலைநிறுத்தியது. 18 ஆம் நூற்றாண்டில், மால்வாவின் கட்டுப்பாடு பேஷ்வாக்கள் வம்சத்தின் வசம் போனது, சௌதாரிகள் \"மண்ட்லோய்ஸ்\" என அழைக்கப்பட்டு வந்தனர் (மண்டல்ஸ் என்பதிலிருந்து பெற்றது) ஏனெனில் அவர்கள் பயன்படுத்திய மொழியாலாகும்.\"\n\n   So the passage says: \"சௌதாரிகள் 'மண்ட்லோய்ஸ்' என அழைக்கப்பட்டு வந்தனர் (மண்டல்ஸ் என்பதிலிருந்து பெற்றது) ஏனெனில் அவர்கள் பயன்படுத்திய மொழியாலாகும்.\"\n\n   The question is: \"மாண்ட்லோயிஸ் என்று அழைக்கப்பட்டவர்கள் யார்?\" (Who are called Mandloys?)\n\n   The answer from the passage: \"சௌதாரிகள்\" (The Saudharis / people called Saudhari).\n\n   Let me confirm: The passage says Saudharis were called \"Mandloys\" (மண்ட்லோய்ஸ்",
+        "openai/gpt-5.6-luna": "சௌதாரிகள்",
+        "openai/gpt-6-luna": "சௌதாரிகள்",
+        "openai/gpt-oss-20b": "சௌதாரிகள்",
+        "poolside/laguna-s-2.1:free": "மண்ட்லோய்ஸ் என்று அழைக்கப்பட்டவர்கள் சௌதாரிகள்.",
+        "qwen/qwen3.8-flash": "சௌதாரிகள்",
+        "stealth/space-bunny-alpha": "சௌதாரிகள்",
+        "xiaomi/mimo-v2.5": "சௌதாரிகள்",
+        "z-ai/glm-5.3-flash": "சௌதாரிகள்"
+      }
+    },
+    {
+      "qid": 718,
+      "question": "நிக்கோபார் தீவுகள் டச்சு ஆட்சியின் கீழ் எப்போது வந்தது?",
+      "context": "இன்னும் ஆவணப்படுத்தப்பட்ட முந்தைய தொல்லியல் சான்றுகள் சில 2,200 ஆண்டுகளுக்கு முன் செல்கிறது;. எனினும், மரபணு மற்றும் கலாச்சார ஆராய்ச்சி கூறுவது என்னவெனில், உள்நாட்டு அந்தமானீஸ் மக்கள் மத்திய கற்காலம் முதல் மற்ற மக்களிடம் இருந்து தனிமைப்படுத்தப்பட்டு இருதிருக்கலாம் என்று கூறுகின்றது. அந்த கால கட்டத்தில், ஜாரவா. செண்டினல், சாம்பென், ஒன்கே மற்றும் அந்தமானியர் பழங்குடி மக்கள் தங்களுக்கென்று தனித்துவமா",
+      "golds": [
+        "1 ஜனவரி 1756"
+      ],
+      "answers": {
+        "anthropic/claude-sonnet-5.5": "1 ஜனவரி 1756",
+        "deepseek/deepseek-v4.1-flash": "1 ஜனவரி 1756 அன்று",
+        "google/gemini-3.8-flash": "1 ஜனவரி 1756 அன்று",
+        "google/gemma-4-26b-a4b-it:free": "1 ஜனவரி 1756",
+        "inclusionai/ling-3.0-flash-vl:free": "1 ஜனவரி 1756 அன்று",
+        "liquid/lfm-2.5-2.6b:free": "1 ஜனவரி 1756",
+        "nex-agi/nex-n2.5-mini": "1 ஜனவரி 1756",
+        "nvidia/nemotron-3-ultra-550b-a55b:free": "1 ஜனவரி 1756 அன்று",
+        "openai/gpt-5.6-luna": "1 ஜனவரி 1756 அன்று",
+        "openai/gpt-6-luna": "1 ஜனவரி 1756 அன்று",
+        "openai/gpt-oss-20b": "1 ஜனவரி 1756",
+        "poolside/laguna-s-2.1:free": "1 ஜனவரி 1756 அன்று",
+        "qwen/qwen3.8-flash": "1 ஜனவரி 1756 அனறற",
+        "stealth/space-bunny-alpha": "1 ஜனவரி 1756",
+        "xiaomi/mimo-v2.5": "1 ஜனவரி 1756 அன்று",
+        "z-ai/glm-5.3-flash": "1 ஜனவரி 1756"
+      }
+    },
+    {
+      "qid": 969,
+      "question": "விஜயநகர சாம்ராஜ்யத்தின் வீழ்ச்சியின் போது தென்னிந்திய சுயாட்சியை ஆளத் தொடங்கியவர் யார்?",
+      "context": "கிருஷ்ணதேவராயரின் ஆட்சிக் காலத்தில்  விஜயநகரப் பேரரசு நாற்புறங்களிலும் விரிவாக்கப்பட்டு, புகழின் உச்சத்தில் இருந்தது. தக்காண சுல்தான்களின் வடக்கு,  கிழக்குப் பகுதிகளையும் மற்றும் கலிங்க நாட்டையும் கைப்பற்றி விஜயநகரப் பேரரசில் இணைத்தார். 1520ல் நடைபெற்றராய்ச்சூர் போரில் கிருஷ்ணதேவராயர்,  பீஜாப்பூர் சுல்தானகத்தை வெற்றி கொண்டார். போரின் முடிவில் பிஜப்பூர் சுல்தான் கிருஷ்ண நதியின் அப்பாலுக்கு விரட்டிய",
+      "golds": [
+        "மதுரை நாயக்கர்கள்"
+      ],
+      "answers": {
+        "anthropic/claude-sonnet-5.5": "மதுரை நாயக்கர்கள், தஞ்சை நாயக்கர்கள் மற்றும் செஞ்சி நாயக்கர்கள்",
+        "deepseek/deepseek-v4.1-flash": "மதுரை நாயக்கர்கள், தஞ்சை நாயக்கர்கள் மற்றும் செஞ்சி நாயக்கர்கள்",
+        "google/gemini-3.8-flash": "மதுரை நாயக்கர்கள், தஞ்சை நாயக்கர்கள் மற்றும் செஞ்சி நாயக்கர்கள்",
+        "google/gemma-4-26b-a4b-it:free": "மதுரை நாயக்கர்கள், தஞ்சை நாயக்கர்கள் மற்றும் செஞ்சி நாயக்கர்கள்",
+        "inclusionai/ling-3.0-flash-vl:free": "மதுரை நாயக்கர்கள், தஞ்சை நாயக்கர்கள் மற்றும் ச",
+        "liquid/lfm-2.5-2.6b:free": "திருமலை தேவ ராயன்",
+        "nex-agi/nex-n2.5-mini": "மதுரை நாயக்கர்கள், தஞ்சை நாயக்கர்கள் மற்றும் செஞ்சி நாயக்கர்கள்",
+        "nvidia/nemotron-3-ultra-550b-a55b:free": "மதுரை நாயக்கர்கள், தஞ்சை நாயக்கர்கள் மற்றும் செஞ்சி நாயக்கர்கள்",
+        "openai/gpt-5.6-luna": "மதுரை நாயக்கர்கள், தஞ்சை நாயக்கர்கள் மற்றும் செஞ்சி நாயக்கர்கள்",
+        "openai/gpt-6-luna": "மதுரை நாயக்கர்கள், தஞ்சை நாயக்கர்கள் மற்றும் செஞ்சி நாயக்கர்கள்",
+        "openai/gpt-oss-20b": "மதுரை நாயக்கர்கள், தஞ்சை நாயக்கர்கள் மற்றும் செஞ்சி நாயக்கர்கள்",
+        "poolside/laguna-s-2.1:free": "மதுரை நாயக்கர்கள்",
+        "qwen/qwen3.8-flash": "மதுரை நாயக்கர்கள், தஞ்சை நாயக்கர்கள் மற்றும் செஞ்சி நாயக்கர்கள்",
+        "stealth/space-bunny-alpha": "மதுரை நாயக்கர்கள்",
+        "xiaomi/mimo-v2.5": "மதுரை நாயக்கர்கள், தஞ்சை நாயக்கர்கள் மற்றும் செஞ்சி நாயக்கர்கள்",
+        "z-ai/glm-5.3-flash": "மதுரை நாயக்கர்கள், தஞ்சை நாயக்கர்கள் மற்றும் செஞ்சி நாயக்கர்கள்"
+      }
+    },
+    {
+      "qid": 562,
+      "question": "காந்தியும் 78 சத்தியாக்கிரகிகளும் சேர்ந்து அகமதாபாத்திலிருந்து தண்டிக்கு 240 மைல் அணிவகுப்பை எப்போது தொடங்கினார்கள்?",
+      "context": "இந்த காலகட்டத்தில் காந்தியும் அவருடன் சேர்ந்து போராடியோரும் பலமுறை சிறை சென்றனர். தொடக்கத்தில் ஆங்கில அரசாங்கம் இவர்களை எளிதாக அடக்கியது போல் தோன்றியது. பின்னர் பொதுமக்களும் ஆங்கில அரசாங்கமும் இவர்களின் உண்மையான மற்றும் நேர்மையான வாதங்களை புரிந்துகொண்டு இவர்களுடைய கோரிக்கைகளை ஏற்கும் நிலை ஏற்பட்டது. இவ்வாறு தனது அறவழிப் போராட்டத்தின் மூலம் தென்னாப்பிரிக்க வாழ் இந்தியரின் சமூக நிலையை மேம்படுத்தும் ",
+      "golds": [
+        "மார்ச் 2, 1930"
+      ],
+      "answers": {
+        "anthropic/claude-sonnet-5.5": "மார்ச் 2, 1930",
+        "deepseek/deepseek-v4.1-flash": "மார்ச் 2, 1930 அன்று",
+        "google/gemini-3.8-flash": "மார்ச் 2, 1930 அன்று",
+        "google/gemma-4-26b-a4b-it:free": "மார்ச் 2, 1930",
+        "inclusionai/ling-3.0-flash-vl:free": "மார்ச் 2, 1930 அன்று",
+        "liquid/lfm-2.5-2.6b:free": "மார்ச் 2, 1930",
+        "nex-agi/nex-n2.5-mini": "மார்ச் 2, 1930",
+        "nvidia/nemotron-3-ultra-550b-a55b:free": "மார்ச் 2, 1930",
+        "openai/gpt-5.6-luna": "மார்ச் 2, 1930 அன்று",
+        "openai/gpt-6-luna": "மார்ச் 2, 1930 அன்று",
+        "openai/gpt-oss-20b": "மார்ச் 2, 1930",
+        "poolside/laguna-s-2.1:free": "மார்ச் 2, 1930 அன்று",
+        "qwen/qwen3.8-flash": "மார்ச் 2, 1930",
+        "stealth/space-bunny-alpha": "மார்ச் 2, 1930 அன்று",
+        "xiaomi/mimo-v2.5": "மார்ச் 2, 1930",
+        "z-ai/glm-5.3-flash": "மார்ச் 2, 1930"
+      }
+    },
+    {
+      "qid": 1585,
+      "question": "விவசாய வரிகள் யாரால் கொண்டு வரப்பட்டது?",
+      "context": "முகலாயப் பேரரசின் கீழ் இந்தியப் பொருளாதாரமானது பெரியதாகவும் மற்றும் வளமானதாகவும் இருந்தது. முகலாய சகாப்தத்தின் போது கி. பி. 1600 இல் இந்தியாவின் மொத்த உள்நாட்டு உற்பத்தியானது உலகப் பொருளாதாரத்தில் 22% ஆக இருந்தது. அந்நேரத்தில் மிங் அரசமரபால் ஆளப்பட்ட சீனாவிற்கு பிறகு உலகின் இரண்டாவது மிகப் பெரிய பொருளாதாரமாக அது இருந்தது. ஐரோப்பாவின் பொருளாதாரத்தை விட பெரியதாக இந்தியாவின் பொருளாதாரம் இருந்தது. 170",
+      "golds": [
+        "அக்பரால் "
+      ],
+      "answers": {
+        "anthropic/claude-sonnet-5.5": "மூன்றாம் முகலாயப் பேரரசர் அக்பரால்",
+        "deepseek/deepseek-v4.1-flash": "மூன்றாம் முகலாயப் பேரரசர் அக்பரால்",
+        "google/gemini-3.8-flash": "மூன்றாம் முகலாயப் பேரரசர் அக்பரால்",
+        "google/gemma-4-26b-a4b-it:free": "அக்பரால்",
+        "inclusionai/ling-3.0-flash-vl:free": "மூன்றாம் முகலாயப் பேரரசர் அக்பரால்",
+        "liquid/lfm-2.5-2.6b:free": "மூன்றாம் முகலாயப் பேரரசர் அக்பரால்",
+        "nex-agi/nex-n2.5-mini": "மூன்றாம் முகலாய பேரரசர் அக்பர்",
+        "nvidia/nemotron-3-ultra-550b-a55b:free": "அக்பரால்",
+        "openai/gpt-5.6-luna": "மூன்றாம் முகலாயப் பேரரசர் அக்பரால்",
+        "openai/gpt-6-luna": "மூன்றாம் முகலாயப் பேரரசர் அக்பரால்",
+        "openai/gpt-oss-20b": "மூன்றாம் முகலாயப் பேரரசர் அக்பரால்",
+        "poolside/laguna-s-2.1:free": "மூன்றாம் முகலாயப் பேரரசர் அக்பரால்",
+        "qwen/qwen3.8-flash": "மூன்றாம் முகலாயப் பேரரசர் அக்பரால்",
+        "stealth/space-bunny-alpha": "அக்பரால்",
+        "xiaomi/mimo-v2.5": "மூன்றாம் முகலாயப் பேரரசர் அக்பரால்",
+        "z-ai/glm-5.3-flash": "மூன்றாம் முகலாயப் பேரரசர் அக்பர்"
+      }
+    },
+    {
+      "qid": 1518,
+      "question": "யார் வளாகத்திற்குள் நுழைய அனுமதிக்கப்படவில்லை?",
+      "context": "பொதுமக்களுக்கு இந்த இடத்துக்குச் சென்று பார்க்கும் அனுமதியும் கிடையாது. இந்த இடத்தை நிர்வகிக்கும் தொல்லியல் துறையின் அனுமதி கிடைத்தால் மட்டுமே இங்கே சென்று பார்க்க முடியும். தரைத்தளத்தில் கருவறை குடையப்படவில்லை. ஆனால் அதன் எட்டு மூலைகளிலும் எட்டு அழகான சிற்பங்கள் காணப்படுகின்றன. இவை: அர்த்தநாரீஸ்வரர் (சிவனும் பார்வதியும் இணைந்த சிற்பம்), ஹரிஹரன் (சிவனும் திருமாலும் இணைந்த சிற்பம்), சுப்பிரமணியன், ",
+      "golds": [
+        "பொதுமக்களுக்கு"
+      ],
+      "answers": {
+        "anthropic/claude-sonnet-5.5": "பொதுமக்களுக்கு",
+        "deepseek/deepseek-v4.1-flash": "பொதுமக்களுக்கு",
+        "google/gemini-3.8-flash": "பொதுமக்களுக்கு",
+        "google/gemma-4-26b-a4b-it:free": "பொதுமக்களுக்கு",
+        "inclusionai/ling-3.0-flash-vl:free": "பொதுமக்கள்",
+        "liquid/lfm-2.5-2.6b:free": "பொதுமக்கள்",
+        "nex-agi/nex-n2.5-mini": "பொதுமக்கள்",
+        "nvidia/nemotron-3-ultra-550b-a55b:free": "பொதுமக்கள்",
+        "openai/gpt-5.6-luna": "பொதுமக்களுக்கு அனுமதி கிடையாது",
+        "openai/gpt-6-luna": "பொதுமக்களுக்கு",
+        "openai/gpt-oss-20b": "பொதுமக்கள்",
+        "poolside/laguna-s-2.1:free": "பொதுமக்களுக்கு",
+        "qwen/qwen3.8-flash": "பொதுமக்களுக்கு",
+        "stealth/space-bunny-alpha": "பொதுமக்கள்",
+        "xiaomi/mimo-v2.5": "பொதுமக்களுக்கு",
+        "z-ai/glm-5.3-flash": "பொதுமக்கள்"
+      }
+    },
+    {
+      "qid": 476,
+      "question": "இந்தியாவின் முதல் இஸ்லாமிய ஆட்சியாளர் யார்?",
+      "context": "ஆப்கானிஸ்தான் நாட்டில் காணப்படும் ஜாம் மினார் எனும் கட்டிடத்தை விட உயரமாகவும் பெயர் பெற்றிடும் நோக்கத்துடன் தில்லியின் முதல் இஸ்லாமிய அரசரான குதுப்த்தீன் ஐபக், 1193 ஆம் ஆண்டு குதுப் மினார் என்ற இந்த கோபுரத்தின் கட்டிட வேலைகளை ஆரம்பித்தார். ஆனால் அவரால் அதன் அடித்தளத்தை மட்டுமே கட்ட முடிந்தது. அவரை பின்தொடர்ந்த, இல்த்மிசு என்ற அரசர் மேலும் மூன்று தளங்களைக் கட்டி முடித்தார். 1286 ஆம் ஆண்டில், அலாவுத",
+      "golds": [
+        "குதுப்த்தீன் ஐபக்"
+      ],
+      "answers": {
+        "anthropic/claude-sonnet-5.5": "குதுப்த்தீன் ஐபக்",
+        "deepseek/deepseek-v4.1-flash": "குதுப்த்தீன் ஐபக்",
+        "google/gemini-3.8-flash": "குதுப்த்தீன் ஐபக்",
+        "google/gemma-4-26b-a4b-it:free": "குதுப்த்தீன் ஐபக்",
+        "inclusionai/ling-3.0-flash-vl:free": "குதுப்தீன் ஐபக்",
+        "liquid/lfm-2.5-2.6b:free": "குதுப்தீன் ஐபக்",
+        "nex-agi/nex-n2.5-mini": "குதூப்த்தீன் ஐபக்",
+        "nvidia/nemotron-3-ultra-550b-a55b:free": "குதுப்த்தீன் ஐபக்",
+        "openai/gpt-5.6-luna": "குதுப்த்தீன் ஐபக்",
+        "openai/gpt-6-luna": "குதுப்த்தீன் ஐபக்",
+        "openai/gpt-oss-20b": "குதுப்த்தீன் ஐபக்",
+        "poolside/laguna-s-2.1:free": "குதுப்த்தீன் ஐபக்",
+        "qwen/qwen3.8-flash": "குதுப்த்தீன் ஐபக்",
+        "stealth/space-bunny-alpha": "குதுப்தீன் ஐபக்",
+        "xiaomi/mimo-v2.5": "குதுப்த்தீன் ஐபக்",
+        "z-ai/glm-5.3-flash": "குதுப்த்தீன் ஐபக்"
+      }
+    },
+    {
+      "qid": 876,
+      "question": "எந்த வணிகப் பள்ளி இந்தியாவின் முதன்மையான வணிகப் பள்ளிகளில் ஒன்றாகும்?",
+      "context": "ஐதராபாத்தை அடிப்படையாகக் கொண்டு பல்வேறு குறிப்பிடத் தக்க கல்வி நிறுவனங்கள் உள்ளன. இந்த நகரில் மூன்று மத்தியப் பல்கலைக்கழகங்களும், இரண்டு நிகர்நிலைப் பல்கலைக்கழகங்களும், ஆறு மாநில பல்கலைக்கழகங்களும் உள்ளன. இவற்றில் 1917 ஆம் ஆண்டு துவங்கிய ஒஸ்மானியா பலகலைக்கழகம்  இந்தியாவிலேயே ஏழாவது பழமைவாய்ந்த ஒன்றாகவும் தென்னிந்தியாவின் மூன்றாவது பழமையான பல்கலைக்கழகமாகவும் திகழ்கிறது. ஐதராபாத் மத்திய பல்கலைக்கழகம",
+      "golds": [
+        "இந்தியன் ஸ்கூல் ஆப் பிசினஸ்"
+      ],
+      "answers": {
+        "anthropic/claude-sonnet-5.5": "இந்தியன் ஸ்கூல் ஆப் பிசினஸ்",
+        "deepseek/deepseek-v4.1-flash": "இந்தியன் ஸ்கூல் ஆப் பிசினஸ்",
+        "google/gemini-3.8-flash": "இந்தியன் ஸ்கூல் ஆப் பிசினஸ்",
+        "google/gemma-4-26b-a4b-it:free": "__ERROR__: retries exhausted",
+        "inclusionai/ling-3.0-flash-vl:free": "இந்தியன் ஸ்கூல் ஆப் பிசினஸ்",
+        "liquid/lfm-2.5-2.6b:free": "இந்தியன் ஸ்கூல் ஆப் பிசினஸ்",
+        "nex-agi/nex-n2.5-mini": "ஐதராபாத்தின் கச்சிபவுளியில் உள்ள இந்தியன் ஸ்கூல் ஆப் பிசினஸ்",
+        "nvidia/nemotron-3-ultra-550b-a55b:free": "இந்தியன் ஸ்கூல் ஆப் பிசினஸ்",
+        "openai/gpt-5.6-luna": "இந்தியன் ஸ்கூல் ஆப் பிசினஸ்",
+        "openai/gpt-6-luna": "இந்தியன் ஸ்கூல் ஆப் பிசினஸ்",
+        "openai/gpt-oss-20b": "இந்தியன் ஸ்கூல் ஆப் பிசினஸ்",
+        "poolside/laguna-s-2.1:free": "இந்தியன் ஸ்கூல் ஆப் பிசினஸ்",
+        "qwen/qwen3.8-flash": "இந்தியன் ஸ்கூல் ஆப் பிசினஸ்",
+        "stealth/space-bunny-alpha": "இந்தியன் ஸ்கூல் ஆப் பிசினஸ்",
+        "xiaomi/mimo-v2.5": "இந்தியன் ஸ்கூல் ஆப் பிசினஸ்",
+        "z-ai/glm-5.3-flash": "இந்தியன் ஸ்கூல் ஆப் பிசினஸ்"
+      }
+    },
+    {
+      "qid": 259,
+      "question": "மூன்றாவது புத்த சங்கம் எங்கே கூடியது?",
+      "context": "அசோகர் கி. பி 263 இல் முற்றிலுமாக உபகுப்தர் தலைமையில் பௌத்த சமயத்திற்கு மாறினார். புத்த மதத்தைப் பரப்புவதற்காகவே தர்ம மகாமாத்திரர்கள் எனும் அதிகாரிகளை நியமித்தார். இலங்கைக்கு அவரின் மகள் சங்கமித்திரை மற்றும் மகன் மகேந்திரனை புத்தர் ஞானம் பெற்ற அரச மரத்தின் ஒரு கிளையுடன் புத்த மதத்தைப் பரப்ப அனுப்பி வைத்தார். பாடலிபுத்திரத்தில் கி. மு. 240 இல் மொகாலிபுத்த தீசர் தலைமையில் மூன்றாம் பௌத்த சங்கத்தை கூட",
+      "golds": [
+        ".பாடலிபுத்திரத்தில் "
+      ],
+      "answers": {
+        "anthropic/claude-sonnet-5.5": "பாடலிபுத்திரத்தில்",
+        "deepseek/deepseek-v4.1-flash": "பாடலிபுத்திரத்தில்",
+        "google/gemini-3.8-flash": "பாடலிபுத்திரத்தில்",
+        "google/gemma-4-26b-a4b-it:free": "பாடலிபுத்திரத்தில்",
+        "inclusionai/ling-3.0-flash-vl:free": "பாடலிபுத்திரத்தில்",
+        "liquid/lfm-2.5-2.6b:free": "பாடலிபுத்திரம்",
+        "nex-agi/nex-n2.5-mini": "பாடலிபுத்திரத்தில்",
+        "nvidia/nemotron-3-ultra-550b-a55b:free": "பாடலிபுத்திரத்தில்",
+        "openai/gpt-5.6-luna": "பாடலிபுத்திரத்தில்",
+        "openai/gpt-6-luna": "பாடலிபுத்திரத்தில்",
+        "openai/gpt-oss-20b": "பாடலிபுத்திரத்தில்",
+        "poolside/laguna-s-2.1:free": "__ERROR__: retries exhausted",
+        "qwen/qwen3.8-flash": "பாடலிபுத்திரத்தில்",
+        "stealth/space-bunny-alpha": "பாடலிபுத்திரத்தில்",
+        "xiaomi/mimo-v2.5": "பாடலிபுத்திரத்தில்",
+        "z-ai/glm-5.3-flash": "பாடலிபுத்திரம்"
+      }
+    },
+    {
+      "qid": 1535,
+      "question": "காங்கிரஸ் தலைவராக போஸ் எத்தனை முறை தேர்ந்தெடுக்கப்பட்டார்?",
+      "context": "போஸ், 'இந்தியாவுக்கு நிபந்தனையற்ற முழுவிடுதலை வேண்டும்' என்ற உறுதியுடன், அதற்கான பரப்புரையைச் செய்தார். அதே நேரத்தில், இந்திய காங்கிரஸ் சபை, 'படிப்படியாக விடுதலை பெறுவதை' ஆதரித்தது. மேலும் முழு விடுதலைக்குப் பதில், பிரித்தானியாவின் ஆட்சிக்குட்பட்ட பகுதியாக, இந்தியா இருக்க விரும்பியது. லாகூரில் நடைபெற்ற காங்கிரசு கருத்தரங்கில் முழுவிடுதலை பெறுவதைத் தன் குறிக்கோளாக ஏற்றுக்கொண்டது. போசு, இரு முறை தொட",
+      "golds": [
+        "இரு முறை "
+      ],
+      "answers": {
+        "anthropic/claude-sonnet-5.5": "இரு முறை",
+        "deepseek/deepseek-v4.1-flash": "இரு முறை",
+        "google/gemini-3.8-flash": "இரு முறை",
+        "google/gemma-4-26b-a4b-it:free": "இரு முறை தொடர்ச்சியாக",
+        "inclusionai/ling-3.0-flash-vl:free": "இரு முறை",
+        "liquid/lfm-2.5-2.6b:free": "இரு முறை",
+        "nex-agi/nex-n2.5-mini": "இரண்டு முறை",
+        "nvidia/nemotron-3-ultra-550b-a55b:free": "இரு முறை",
+        "nvidia/nemotron-3.5-lightning:free": "இரு முறை",
+        "openai/gpt-5.6-luna": "இரு முறை தொடர்ச்சியாக",
+        "openai/gpt-6-luna": "இரு முறை தொடர்ச்சியாக",
+        "openai/gpt-oss-20b": "இரு முறை",
+        "poolside/laguna-s-2.1:free": "இரு முறை",
+        "qwen/qwen3.8-flash": "இரண்டு முறை",
+        "stealth/space-bunny-alpha": "இரு முறை",
+        "xiaomi/mimo-v2.5": "இரு முறை",
+        "z-ai/glm-5.3-flash": "இரு முறை"
+      }
+    },
+    {
+      "qid": 785,
+      "question": "எந்த நாட்டில் பல கலாச்சார சமூகம் உள்ளது?",
+      "context": "இலங்கை பல்லின மக்கள் ஒன்றாக வாழும் நாடாகும். இவர்கள் பல சமயங்களைப் பின்பற்றுவதுடன், தனித்துவமான கலாச்சாரங்களையும் பேணி வருகின்றனர். பொதுவாக அனைத்தின மக்களும் ஒற்றுமையாக வாழ்ந்த பொதும், கடந்த இரு தசாப்தங்களாக இனப்பிரச்சனை தலைவிரித்தாடுகிறது. இதனால் பல அரசியல், சமூக பிரச்சனைகள் தோன்றியுள்ளன. இலங்கையின் மக்கள்தொகை 20.869 (2011 ம் ஆண்டைய கணக்கெடுப்பின் படி) மில்லியன் ஆகும். இலங்கை ஒரு வளர்முக நாடாகவிர",
+      "golds": [
+        "இலங்கை"
+      ],
+      "answers": {
+        "anthropic/claude-sonnet-5.5": "இலங்கை",
+        "deepseek/deepseek-v4.1-flash": "இலங்கை",
+        "google/gemini-3.8-flash": "இலங்கை",
+        "google/gemma-4-26b-a4b-it:free": "இலங்கை பல்லின மக்கள் ஒன்றாக வாழும் நாடாகும்.",
+        "inclusionai/ling-3.0-flash-vl:free": "இலங்கை",
+        "liquid/lfm-2.5-2.6b:free": "இலங்கை",
+        "nex-agi/nex-n2.5-mini": "இலங்கை",
+        "nvidia/nemotron-3-ultra-550b-a55b:free": "இலங்கை பல்லின மக்கள் ஒன்றாக வாழும் நாடாகும்",
+        "openai/gpt-5.6-luna": "இலங்கை",
+        "openai/gpt-6-luna": "இலங்கை",
+        "openai/gpt-oss-20b": "இலங்கை",
+        "poolside/laguna-s-2.1:free": "இலங்கை",
+        "qwen/qwen3.8-flash": "இலங்கை",
+        "stealth/space-bunny-alpha": "இலங்கை",
+        "xiaomi/mimo-v2.5": "இலங்கை",
+        "z-ai/glm-5.3-flash": "இலங்கை"
+      }
+    },
+    {
+      "qid": 1501,
+      "question": "முஜிபுர் ரஹ்மான் எந்த நாளில் கைது செய்யப்பட்டார்?",
+      "context": "பெரும் வங்காளப் பகுதியிலுள்ள நாகரிகத்தின் எச்சங்கள் நாலாயிரம் வருட பழைமை வாய்ந்தவை. இக்காலப்பகுதியில், திராவிட, திபெத்தோ-பர்ம மற்றும் ஆஸ்திரோ-ஆசிய மக்கள் இப்பகுதிகளில் வாழ்ந்தனர். \"பங்க்லா\" அல்லது \"பெங்கால்\" என்ற சொல்லின் சரியான மூலம் அறியப்படவில்லை. இருப்பினும், இப்பகுதிகளில் கி. மு. 1000ம் ஆண்டு காலப்பகுதியில் குடியேறிய திராவிட மொழி பேசும் குழுவான \"பாங்\"இலிருந்து வந்திருக்கலாம் எனக் கருதப்படுகிற",
+      "golds": [
+        "1966ல்"
+      ],
+      "answers": {
+        "anthropic/claude-sonnet-5.5": "1966ல்",
+        "deepseek/deepseek-v4.1-flash": "1966ல்",
+        "google/gemini-3.8-flash": "1966ல்",
+        "google/gemma-4-26b-a4b-it:free": "கொடுக்கப்பட்ட பகுதியில் அந்தத் தகவல் இல்லை.",
+        "inclusionai/ling-3.0-flash-vl:free": "1966ல்",
+        "liquid/lfm-2.5-2.6b:free": "1966ல்",
+        "nex-agi/nex-n2.5-mini": "1966ல்",
+        "nvidia/nemotron-3-ultra-550b-a55b:free": "1966ல்",
+        "openai/gpt-5.6-luna": "1966ல்",
+        "openai/gpt-6-luna": "1966ல்",
+        "openai/gpt-oss-20b": "1966ல்",
+        "poolside/laguna-s-2.1:free": "1966ல்",
+        "qwen/qwen3.8-flash": "1966ல்",
+        "stealth/space-bunny-alpha": "1966ல்",
+        "xiaomi/mimo-v2.5": "1966ல்",
+        "z-ai/glm-5.3-flash": "1966"
+      }
+    }
+  ]
+}

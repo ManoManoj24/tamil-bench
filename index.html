@@ -80,12 +80,13 @@
       </div>
     </div>
     <p class="task-note" id="taskNote"></p>
-    <div class="table-scroll">
+    <div class="table-scroll" id="tableWrap">
       <table class="board" id="board">
         <thead><tr id="boardHead"></tr></thead>
         <tbody id="boardBody"></tbody>
       </table>
     </div>
+    <div id="arenaWrap" hidden></div>
     <p class="empty" id="emptyState" hidden data-i18n="board.empty">No models match your search.</p>
   </section>
 
@@ -109,6 +110,7 @@
           <li data-i18n="method.c1b"><b>IndicQA</b> — 100 reading-comprehension questions over Tamil Wikipedia passages (AI4Bharat, CC-BY-SA-4.0). Metrics: exact match + F1.</li>
           <li data-i18n="method.c1c"><b>IndicXNLI</b> — 200 three-way logic questions: entail, contradict, or neutral (repaired mirror of AI4Bharat's IndicXNLI). Metric: accuracy.</li>
           <li data-i18n="method.c1d"><b>Bluff catch</b> — unanswerable IndicQA traps: does the model abstain or invent an answer? Lower bluff rate wins.</li>
+          <li data-i18n="method.c1e"><b>Arena</b> — blind battles: two models' real recorded Tamil answers side by side. Vote for the better one; names revealed after. Not a metric, just for fun.</li>
         </ul>
       </div>
       <div class="card">
